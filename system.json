@@ -1,0 +1,31 @@
+{
+  "id": "elementia",
+  "title": "Elementia RPG",
+  "description": "Sistema oficial de Elementia RPG. Focado em combate tático, gestão de ações e customização profunda.",
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "11",
+    "verified": "11"
+  },
+  "authors": [
+    {
+      "name": "Flavio Antonio Caribe Peixoto (Lead Game Designer)",
+      "role": "Creator & Lead Designer"
+    }
+  ],
+  "scripts": [],
+  "esmodules": [
+    "module/elementia.js"
+  ],
+  "styles": [
+    "css/elementia.css"
+  ],
+  "packs": [],
+  "languages": [
+    {
+      "lang": "pt-BR",
+      "name": "Português (Brasil)",
+      "path": "lang/pt-BR.json"
+    }
+  ]
+}
