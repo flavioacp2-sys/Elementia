@@ -3,21 +3,28 @@
     "types": ["character", "npc"],
     "character": {
       "resources": {
-        "health": { 
-          "value": 10, 
-          "max": 10, 
-          "temp": 0 
+        "health": { "value": 10, "max": 10, "temp": 0 },
+        "primaryResource": { "value": 0, "max": 0, "label": "Mana" },
+        "secondaryResource": { "value": 0, "max": 0, "label": "Manobra" }
+      },
+      "skills": {
+        "combat": {
+          "perception": { "rank": 0, "bonus": 0, "passive": 10, "total": 0 },
+          "reflexes": { "rank": 0, "bonus": 0, "total": 0 },
+          "resilience": { "rank": 0, "bonus": 0, "total": 0 }
         },
-        "primaryResource": { 
-          "value": 0, 
-          "max": 0, 
-          "label": "Mana" 
-        },
-        "secondaryResource": { 
-          "value": 0, 
-          "max": 0, 
-          "label": "Manobra" 
+        "general": {
+          "athletics": { "rank": 0, "bonus": 0, "total": 0 },
+          "insight": { "rank": 0, "bonus": 0, "passive": 10, "total": 0 },
+          "investigation": { "rank": 0, "bonus": 0, "passive": 10, "total": 0 }
         }
+      },
+      "carryWeight": {
+        "light": 10,
+        "medium": 15,
+        "heavy": 20,
+        "lift": 25,
+        "drag": 35
       },
       "defenses": {
         "block": { "total": 0, "bonus": 0 },
