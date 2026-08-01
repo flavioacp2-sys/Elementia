@@ -1,4 +1,27 @@
-<!-- PAINEL DE STATUS VITAIS E RECURSOS -->
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    <!-- CABEÇALHO DO PERSONAGEM (Foto e Nome) -->
+    <header class="sheet-header">
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Nome do Personagem"/></h1>
+        </div>
+    </header>
+
+    <!-- NAVEGAÇÃO DE ABAS -->
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="combate">Combate & Perícias</a>
+        <a class="item" data-tab="habilidades">Habilidades</a>
+        <a class="item" data-tab="inventario">Inventário</a>
+    </nav>
+
+    <!-- CORPO DA FICHA (Onde o conteúdo das abas aparece) -->
+    <section class="sheet-body">
+
+        <!-- ABA 1: COMBATE E PERÍCIAS -->
+        <div class="tab" data-group="primary" data-tab="combate">
+            
+          <!-- PAINEL DE STATUS VITAIS E RECURSOS -->
 <section class="tactical-dashboard">
     
     <!-- Bloco 1: Vida e Nível -->
@@ -202,7 +225,7 @@
             </ul>
         </div>
 
-        <!-- COLUNA 2: GERAIS -->
+                <!-- COLUNA 2: GERAIS -->
         <div class="skill-category">
             <h4 class="category-header">Gerais</h4>
             <div class="skill-list-header">
@@ -379,7 +402,13 @@
     </div>
 </section>
 
-<hr>
+
+        </div>
+
+        <!-- ABA 2: HABILIDADES (Raciais e de Classe) -->
+        <div class="tab" data-group="primary" data-tab="habilidades">
+            
+          <hr>
 
 <!-- SEPARAÇÃO DE HABILIDADES -->
 <div class="habilidades-container">
@@ -422,3 +451,15 @@
     </section>
 
 </div>
+
+
+        </div>
+
+        <!-- ABA 3: INVENTÁRIO (Em branco por enquanto) -->
+        <div class="tab" data-group="primary" data-tab="inventario">
+            <h3 class="section-title">Equipamentos e Engenhocas</h3>
+            <p>O inventário será construído aqui.</p>
+        </div>
+
+    </section>
+</form>
