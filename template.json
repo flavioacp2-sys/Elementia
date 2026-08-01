@@ -9,14 +9,62 @@
       },
       "skills": {
         "combat": {
+          "riding": { "rank": 0, "bonus": 0, "total": 0 },
+          "stealth": { "rank": 0, "bonus": 0, "total": 0 },
+          "weaponSkill": { "rank": 0, "bonus": 0, "total": 0 },
+          "brawling": { "rank": 0, "bonus": 0, "total": 0 },
           "perception": { "rank": 0, "bonus": 0, "passive": 10, "total": 0 },
+          "precision": { "rank": 0, "bonus": 0, "total": 0 },
           "reflexes": { "rank": 0, "bonus": 0, "total": 0 },
-          "resilience": { "rank": 0, "bonus": 0, "total": 0 }
+          "resilience": { "rank": 0, "bonus": 0, "total": 0 },
+          "willpower": { "rank": 0, "bonus": 0, "total": 0 },
+          "arcanism": { "rank": 0, "bonus": 0, "total": 0 },
+          "arcaneRitual": { "rank": 0, "bonus": 0, "total": 0 },
+          "marksmanship": { "rank": 0, "bonus": 0, "total": 0 },
+          "rage": { "rank": 0, "bonus": 0, "total": 0 },
+          "magicMusic": { "rank": 0, "bonus": 0, "total": 0 },
+          "runeMagic": { "rank": 0, "bonus": 0, "total": 0 },
+          "faith": { "rank": 0, "bonus": 0, "total": 0 },
+          "divineRitual": { "rank": 0, "bonus": 0, "total": 0 },
+          "herbalism": { "rank": 0, "bonus": 0, "total": 0 },
+          "druidicRitual": { "rank": 0, "bonus": 0, "total": 0 },
+          "training": { "rank": 0, "bonus": 0, "total": 0 },
+          "thievery": { "rank": 0, "bonus": 0, "total": 0 }
         },
         "general": {
+          "acrobatics": { "rank": 0, "bonus": 0, "total": 0 },
+          "animalHandling": { "rank": 0, "bonus": 0, "total": 0 },
           "athletics": { "rank": 0, "bonus": 0, "total": 0 },
+          "bluff": { "rank": 0, "bonus": 0, "total": 0 },
+          "diplomacy": { "rank": 0, "bonus": 0, "total": 0 },
+          "intimidation": { "rank": 0, "bonus": 0, "total": 0 },
           "insight": { "rank": 0, "bonus": 0, "passive": 10, "total": 0 },
-          "investigation": { "rank": 0, "bonus": 0, "passive": 10, "total": 0 }
+          "investigation": { "rank": 0, "bonus": 0, "passive": 10, "total": 0 },
+          "streetwise": { "rank": 0, "bonus": 0, "total": 0 },
+          "negotiation": { "rank": 0, "bonus": 0, "total": 0 },
+          "seduction": { "rank": 0, "bonus": 0, "total": 0 },
+          "survival": { "rank": 0, "bonus": 0, "total": 0 }
+        },
+        "knowledge": {
+          "bestiary": { "rank": 0, "bonus": 0, "total": 0 },
+          "geography": { "rank": 0, "bonus": 0, "total": 0 },
+          "glyphs": { "rank": 0, "bonus": 0, "total": 0 },
+          "heraldry": { "rank": 0, "bonus": 0, "total": 0 },
+          "history": { "rank": 0, "bonus": 0, "total": 0 },
+          "languages": { "rank": 0, "bonus": 0, "total": 0 },
+          "medicine": { "rank": 0, "bonus": 0, "total": 0 },
+          "nature": { "rank": 0, "bonus": 0, "total": 0 },
+          "religion": { "rank": 0, "bonus": 0, "total": 0 }
+        },
+        "crafting": {
+          "alchemist": { "rank": 0, "bonus": 0, "total": 0 },
+          "trapper": { "rank": 0, "bonus": 0, "total": 0 },
+          "artisan": { "rank": 0, "bonus": 0, "total": 0 },
+          "artist": { "rank": 0, "bonus": 0, "total": 0 },
+          "apothecary": { "rank": 0, "bonus": 0, "total": 0 },
+          "enchanter": { "rank": 0, "bonus": 0, "total": 0 },
+          "blacksmith": { "rank": 0, "bonus": 0, "total": 0 },
+          "inventor": { "rank": 0, "bonus": 0, "total": 0 }
         }
       },
       "carryWeight": {
