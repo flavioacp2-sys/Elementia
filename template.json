@@ -45,6 +45,8 @@
           "divineRitual": { "rank": 0, "bonus": 0, "total": 0 },
           "herbalism": { "rank": 0, "bonus": 0, "total": 0 },
           "druidicRitual": { "rank": 0, "bonus": 0, "total": 0 }
+          "chakra": { "rank": 0, "bonus": 0, "total": 0 },
+          "divineBlessing": { "rank": 0, "bonus": 0, "total": 0 }
         },
         "general": {
           "acrobatics": { "rank": 0, "bonus": 0, "total": 0 },
