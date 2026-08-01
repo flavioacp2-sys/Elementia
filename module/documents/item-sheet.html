@@ -1,0 +1,116 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    <!-- CABEÇALHO DO ITEM -->
+    <header class="sheet-header">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" height="80" width="80"/>
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Nome do Item"/></h1>
+            <div class="item-type-label">
+                <span>Tipo: {{item.type}}</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVEGAÇÃO DE ABAS -->
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="detalhes">Detalhes</a>
+        <a class="item" data-tab="descricao">Descrição</a>
+    </nav>
+
+    <!-- CORPO DA FICHA -->
+    <section class="sheet-body">
+
+        <!-- ABA 1: DETALHES (Os inputs mudam de acordo com o Tipo do Item) -->
+        <div class="tab" data-group="primary" data-tab="detalhes">
+            
+            <div class="item-stats-grid">
+                
+                <!-- SE FOR ARMA -->
+                {{#if isWeapon}}
+                <div class="stat-group">
+                    <label>Dano</label>
+                    <input type="text" name="system.damage" value="{{system.damage}}"/>
+                </div>
+                <div class="stat-group">
+                    <label>Tipo de Dano</label>
+                    <input type="text" name="system.damageType" value="{{system.damageType}}"/>
+                </div>
+                <div class="stat-group">
+                    <label>Alcance</label>
+                    <input type="text" name="system.range" value="{{system.range}}"/>
+                </div>
+                <div class="stat-group">
+                    <label>Peso (kg)</label>
+                    <input type="text" name="system.weight" value="{{system.weight}}" data-dtype="Number"/>
+                </div>
+                {{/if}}
+
+                <!-- SE FOR ARMADURA -->
+                {{#if isArmor}}
+                <div class="stat-group">
+                    <label>Tipo de Armadura</label>
+                    <input type="text" name="system.armorType" value="{{system.armorType}}"/>
+                </div>
+                <div class="stat-group">
+                    <label>Resistência Física</label>
+                    <input type="text" name="system.physicalResist" value="{{system.physicalResist}}" data-dtype="Number"/>
+                </div>
+                <div class="stat-group">
+                    <label>Resistência Mágica</label>
+                    <input type="text" name="system.magicalResist" value="{{system.magicalResist}}" data-dtype="Number"/>
+                </div>
+                <div class="stat-group">
+                    <label>Peso (kg)</label>
+                    <input type="text" name="system.weight" value="{{system.weight}}" data-dtype="Number"/>
+                </div>
+                {{/if}}
+
+                <!-- SE FOR HABILIDADE -->
+                {{#if isAbility}}
+                <div class="stat-group">
+                    <label>Custo de Ação</label>
+                    <input type="text" name="system.actionCost" value="{{system.actionCost}}"/>
+                </div>
+                <div class="stat-group">
+                    <label>Custo de Recurso</label>
+                    <input type="text" name="system.resourceCost" value="{{system.resourceCost}}"/>
+                </div>
+                <div class="stat-group">
+                    <label>Fonte (racial/class)</label>
+                    <input type="text" name="system.sourceType" value="{{system.sourceType}}"/>
+                </div>
+                {{/if}}
+
+            </div>
+
+            <!-- ECONOMIA E QUALIDADE (Aparece para armas e armaduras) -->
+            {{#if (or isWeapon isArmor)}}
+            <hr>
+            <h3 class="group-header">Economia e Slots</h3>
+            <div class="item-stats-grid">
+                <div class="stat-group">
+                    <label>Qualidade</label>
+                    <select name="system.quality">
+                        {{selectOptions (hash Mundana="Mundana" Comum="Comum" Incomum="Incomum" Rara="Rara" ObraPrima="Obra-Prima" Epica="Épica" Lendaria="Lendária") selected=system.quality}}
+                    </select>
+                </div>
+                <div class="stat-group">
+                    <label>Preço Base</label>
+                    <input type="text" name="system.economy.basePrice" value="{{system.economy.basePrice}}" data-dtype="Number"/>
+                </div>
+                <div class="stat-group">
+                    <label>Moeda</label>
+                    <input type="text" name="system.economy.currency" value="{{system.economy.currency}}"/>
+                </div>
+            </div>
+            {{/if}}
+
+        </div>
+
+        <!-- ABA 2: DESCRIÇÃO -->
+        <div class="tab" data-group="primary" data-tab="descricao">
+            {{editor system.description target="system.description" button=true owner=owner editable=editable}}
+        </div>
+
+    </section>
+</form>
