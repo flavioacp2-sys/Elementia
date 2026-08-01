@@ -1,0 +1,125 @@
+/* ========================================== */
+/* PAINEL TÁTICO E INPUTS NUMÉRICOS           */
+/* ========================================== */
+
+.tactical-dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid #c9c7b8;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.dashboard-group {
+    display: flex;
+    gap: 10px;
+    flex: 1;
+    min-width: 200px;
+    border-right: 1px dashed #a8a698;
+    padding-right: 15px;
+}
+
+.dashboard-group:last-child {
+    border-right: none;
+    padding-right: 0;
+}
+
+/* Caixas de Status (Inputs) */
+.stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid #a8a698;
+    border-radius: 4px;
+    padding: 5px;
+    flex: 1;
+}
+
+.stat-box label {
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #4a4a4a;
+    margin-bottom: 4px;
+}
+
+.stat-inputs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+/* Estilo padrão de Inputs Numéricos */
+.stat-inputs input {
+    width: 40px;
+    height: 30px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid #7a7971;
+    border-radius: 3px;
+    background: #fdfdfd;
+}
+
+.stat-inputs input:focus {
+    box-shadow: 0 0 5px rgba(200, 100, 0, 0.5);
+    outline: none;
+}
+
+/* Valores Calculados (Apenas Leitura) */
+.max-value {
+    font-size: 16px;
+    color: #555;
+    font-weight: bold;
+}
+
+.max-value.calculated {
+    color: #7a3b3b; /* Destaque sutil para valores que vêm do sistema */
+}
+
+/* ========================================== */
+/* PAINEL DE CAPACIDADE DE CARGA              */
+/* ========================================== */
+
+.carry-weight-dashboard {
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 14px;
+    border-bottom: 2px solid #7a3b3b;
+    margin-bottom: 10px;
+    padding-bottom: 3px;
+}
+
+.weight-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.weight-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #e9e8e0;
+    border: 1px solid #c9c7b8;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.weight-box label {
+    font-size: 10px;
+    color: #666;
+}
+
+.weight-box span {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
