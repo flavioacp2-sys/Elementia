@@ -6,10 +6,18 @@
         "health": { "value": 10, "max": 10, "temp": 0 },
         "primaryResource": { "value": 0, "max": 0, "label": "Mana" },
         "secondaryResource": { "value": 0, "max": 0, "label": "Manobra" }
-      "attributes": {
+    "attributes": {
         "movement": { "value": 0, "base": 6 },
         "vision": { "value": "Normal" },
-        "size": { "value": "Médio" }
+        "size": { "value": "Médio" },
+        "actionPoints": { "value": 3, "max": 3 }, 
+        "reaction": { "value": 1, "max": 1 },
+        "carga": {
+          "value": 0,
+          "leve": 10,
+          "media": 15,
+          "pesada": 20
+        }
       },
       "skills": {
         "combat": {
@@ -80,7 +88,7 @@
       }
     }
   "Item": {
-    "types": ["weapon", "armor", "shield", "gear", "spell", "skill", "race", "origin"],
+    "types": ["weapon", "armor", "shield", "gear", "spell", "skill", "race", "origin", "class", "ability"],
     "weapon": {
       "damage": "1d6",
       "damageType": "Cortante",
@@ -178,6 +186,16 @@
       "equipment": "",
       "inheritedSkill": "",
       "setback": ""
+    },
+    "class": {
+      "description": "",
+      "hpPerLevel": 6,
+      "primaryResource": "Mana"
+    },
+    "ability": {
+      "description": "",
+      "actionCost": "1 Ação",
+      "sourceType": "racial" // Pode ser "racial", "class" ou "origin"
     }
   }
 }
