@@ -624,8 +624,9 @@
                                 <i class="{{#if item.system.equipped}}fas{{else}}far{{/if}} fa-check-circle"></i>
                             </a>
                             
-                            <div class="item-name">
-                                <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+                           <div class="item-name">
+                                <!-- Adicionamos a classe item-roll e um cursor pointer -->
+                                <img src="{{item.img}}" title="Atacar com {{item.name}}" width="24" height="24" class="item-roll" style="cursor: pointer; border-radius: 3px;"/>
                                 <h4>{{item.name}}</h4>
                             </div>
                             <span class="item-stat">{{item.system.damage}}</span>
