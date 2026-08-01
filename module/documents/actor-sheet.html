@@ -12,6 +12,95 @@
     </div>
 </div>
 
+<!-- PAINEL DE STATUS VITAIS E RECURSOS -->
+<section class="tactical-dashboard">
+    
+    <!-- Bloco 1: Vida e Nível -->
+    <div class="dashboard-group">
+        <div class="stat-box vital">
+            <label>Pontos de Vida</label>
+            <div class="stat-inputs">
+                <!-- Editável pelo jogador -->
+                <input name="system.attributes.health.value" type="text" value="{{system.attributes.health.value}}" data-dtype="Number"/>
+                <span class="separator"> / </span>
+                <!-- Editável (caso o mestre queira dar HP bônus) -->
+                <input name="system.attributes.health.max" type="text" value="{{system.attributes.health.max}}" data-dtype="Number"/>
+            </div>
+        </div>
+
+        <div class="stat-box level">
+            <label>Nível</label>
+            <input name="system.attributes.level.value" type="text" value="{{system.attributes.level.value}}" data-dtype="Number"/>
+        </div>
+    </div>
+
+    <!-- Bloco 2: Ações e Reações -->
+    <div class="dashboard-group">
+        <div class="stat-box action-points">
+            <label>Pontos de Ação</label>
+            <div class="stat-inputs">
+                <input name="system.attributes.actionPoints.value" type="text" value="{{system.attributes.actionPoints.value}}" data-dtype="Number"/>
+                <span class="max-value"> / {{system.attributes.actionPoints.max}}</span>
+            </div>
+        </div>
+
+        <div class="stat-box reaction-points">
+            <label>Reações</label>
+            <div class="stat-inputs">
+                <input name="system.attributes.reactions.value" type="text" value="{{system.attributes.reactions.value}}" data-dtype="Number"/>
+                <span class="max-value"> / {{system.attributes.reactions.max}}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bloco 3: Recursos Dinâmicos (Renderiza apenas se a Classe estiver equipada) -->
+    {{#if system.attributes.resources.primario.label}}
+    <div class="dashboard-group resources-group">
+        <div class="stat-box resource primary">
+            <label>{{system.attributes.resources.primario.label}}</label>
+            <div class="stat-inputs">
+                <input name="system.attributes.resources.primario.value" type="text" value="{{system.attributes.resources.primario.value}}" data-dtype="Number"/>
+                <!-- Valor Máximo é Apenas Leitura (Calculado no actor.js) -->
+                <span class="max-value calculated"> / {{system.attributes.resources.primario.max}}</span>
+            </div>
+        </div>
+
+        {{#if system.attributes.resources.secundario.label}}
+        <div class="stat-box resource secondary">
+            <label>{{system.attributes.resources.secundario.label}}</label>
+            <div class="stat-inputs">
+                <input name="system.attributes.resources.secundario.value" type="text" value="{{system.attributes.resources.secundario.value}}" data-dtype="Number"/>
+                <span class="max-value calculated"> / {{system.attributes.resources.secundario.max}}</span>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+    {{/if}}
+</section>
+
+<!-- PAINEL DE CARGA (Apenas Leitura) -->
+<section class="carry-weight-dashboard">
+    <h3 class="section-title">Capacidade de Carga (kg)</h3>
+    <div class="weight-grid">
+        <div class="weight-box leve">
+            <label>Leve</label>
+            <span>{{system.attributes.carga.leve}}</span>
+        </div>
+        <div class="weight-box media">
+            <label>Média</label>
+            <span>{{system.attributes.carga.media}}</span>
+        </div>
+        <div class="weight-box pesada">
+            <label>Pesada</label>
+            <span>{{system.attributes.carga.pesada}}</span>
+        </div>
+        <div class="weight-box erguer">
+            <label>Erguer</label>
+            <span>{{system.attributes.carga.erguer}}</span>
+        </div>
+    </div>
+</section>
+
 <hr>
 
 <!-- SEPARAÇÃO DE HABILIDADES -->
