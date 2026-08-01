@@ -87,6 +87,83 @@
     </div>
 </section>
 
+<!-- PAINEL DE PERÍCIAS -->
+<section class="skills-dashboard">
+    <h3 class="section-title">Perícias</h3>
+    
+    <div class="skills-grid">
+        
+        <!-- COLUNA 1: COMBATE -->
+        <div class="skill-category">
+            <h4 class="category-header">Combate</h4>
+            <div class="skill-list-header">
+                <span class="skill-name">Perícia</span>
+                <span class="skill-stat" title="Total Calculado">Tot</span>
+                <span class="skill-stat" title="Graduação">Grad</span>
+                <span class="skill-stat" title="Bônus Adicional">Bônus</span>
+            </div>
+            <ul class="skills-list">
+                <!-- Exemplo de Perícia Padrão -->
+                <li class="skill-row">
+                    <a class="skill-roll" data-skill="resilience" title="Rolar Resiliência"><i class="fas fa-dice-d20"></i></a>
+                    <span class="skill-name">Resiliência</span>
+                    <span class="skill-total">{{system.skills.combat.resilience.total}}</span>
+                    <input type="text" name="system.skills.combat.resilience.rank" value="{{system.skills.combat.resilience.rank}}" data-dtype="Number"/>
+                    <input type="text" name="system.skills.combat.resilience.bonus" value="{{system.skills.combat.resilience.bonus}}" data-dtype="Number"/>
+                </li>
+                <li class="skill-row">
+                    <a class="skill-roll" data-skill="reflexes" title="Rolar Reflexos"><i class="fas fa-dice-d20"></i></a>
+                    <span class="skill-name">Reflexos</span>
+                    <span class="skill-total">{{system.skills.combat.reflexes.total}}</span>
+                    <input type="text" name="system.skills.combat.reflexes.rank" value="{{system.skills.combat.reflexes.rank}}" data-dtype="Number"/>
+                    <input type="text" name="system.skills.combat.reflexes.bonus" value="{{system.skills.combat.reflexes.bonus}}" data-dtype="Number"/>
+                </li>
+                <!-- Exemplo de Perícia com Passiva (Percepção) -->
+                <li class="skill-row">
+                    <a class="skill-roll" data-skill="perception" title="Rolar Percepção"><i class="fas fa-dice-d20"></i></a>
+                    <span class="skill-name">Percepção <span class="passive-val">(Passiva: {{system.skills.combat.perception.passive}})</span></span>
+                    <span class="skill-total">{{system.skills.combat.perception.total}}</span>
+                    <input type="text" name="system.skills.combat.perception.rank" value="{{system.skills.combat.perception.rank}}" data-dtype="Number"/>
+                    <input type="text" name="system.skills.combat.perception.bonus" value="{{system.skills.combat.perception.bonus}}" data-dtype="Number"/>
+                </li>
+                <!-- Adicione as outras de combate aqui (riding, stealth, weaponSkill, brawling, etc) seguindo a mesma estrutura -->
+            </ul>
+        </div>
+
+        <!-- COLUNA 2: GERAIS -->
+        <div class="skill-category">
+            <h4 class="category-header">Gerais</h4>
+            <div class="skill-list-header">
+                <span class="skill-name">Perícia</span>
+                <span class="skill-stat" title="Total Calculado">Tot</span>
+                <span class="skill-stat" title="Graduação">Grad</span>
+                <span class="skill-stat" title="Bônus Adicional">Bônus</span>
+            </div>
+            <ul class="skills-list">
+                <li class="skill-row">
+                    <a class="skill-roll" data-skill="athletics" title="Rolar Atletismo"><i class="fas fa-dice-d20"></i></a>
+                    <span class="skill-name">Atletismo</span>
+                    <span class="skill-total">{{system.skills.general.athletics.total}}</span>
+                    <input type="text" name="system.skills.general.athletics.rank" value="{{system.skills.general.athletics.rank}}" data-dtype="Number"/>
+                    <input type="text" name="system.skills.general.athletics.bonus" value="{{system.skills.general.athletics.bonus}}" data-dtype="Number"/>
+                </li>
+                <!-- Exemplo com Passiva (Intuição) -->
+                <li class="skill-row">
+                    <a class="skill-roll" data-skill="insight" title="Rolar Intuição"><i class="fas fa-dice-d20"></i></a>
+                    <span class="skill-name">Intuição <span class="passive-val">(Passiva: {{system.skills.general.insight.passive}})</span></span>
+                    <span class="skill-total">{{system.skills.general.insight.total}}</span>
+                    <input type="text" name="system.skills.general.insight.rank" value="{{system.skills.general.insight.rank}}" data-dtype="Number"/>
+                    <input type="text" name="system.skills.general.insight.bonus" value="{{system.skills.general.insight.bonus}}" data-dtype="Number"/>
+                </li>
+                <!-- Adicione as outras gerais aqui (acrobatics, animalHandling, bluff, etc) -->
+            </ul>
+        </div>
+        
+        <!-- Você pode criar a COLUNA 3: CONHECIMENTO e COLUNA 4: OFÍCIO copiando o bloco da div "skill-category" -->
+
+    </div>
+</section>
+
 <hr>
 
 <!-- SEPARAÇÃO DE HABILIDADES -->
