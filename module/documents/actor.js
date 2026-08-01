@@ -13,11 +13,31 @@ export class ElementiaActor extends Actor {
   _prepareCharacterData(system) {
     const skills = system.skills;
 
-    // 1. CÁLCULO DE PERÍCIAS (Total = Graduação + Bônus)
+// 1. CÁLCULO DE PERÍCIAS (Total = Graduação + Bônus)
+    // Regra de Limite por Nível: lv1=3, lv2=4, lv3-10=5, lv11-20=10.
+    const level = system.attributes.level.value || 1;
+    let maxRank = 3;
+    
+    if (level === 2) {
+        maxRank = 4;
+    } else if (level >= 3 && level <= 10) {
+        maxRank = 5;
+    } else if (level >= 11) {
+        maxRank = 10;
+    }
+
     for (let category in skills) {
       for (let skillKey in skills[category]) {
         let skill = skills[category][skillKey];
-        skill.total = skill.rank + skill.bonus;
+        
+        // Aplica a trava matemática (Cap)
+        let effectiveRank = skill.rank;
+        if (effectiveRank > maxRank) {
+            effectiveRank = maxRank;
+            console.warn(`Elementia | A graduação da perícia excedeu o limite do Nível ${level}. Reduzindo para ${maxRank}.`);
+        }
+        
+        skill.total = effectiveRank + skill.bonus;
       }
     }
 
