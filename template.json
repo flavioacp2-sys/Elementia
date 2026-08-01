@@ -5,6 +5,7 @@
       "resources": {
         "health": { "value": 10, "max": 10, "temp": 0 },
     "attributes": {
+      "level": { "value": 1 },
       "resources": {
           "primario": { "label": "", "value": 0, "max": 0 },
           "secundario": { "label": "", "value": 0, "max": 0 }
