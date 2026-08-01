@@ -75,21 +75,58 @@
         "initiative": { "total": 0 }
       }
     }
-  },
   "Item": {
-    "types": ["weapon", "armor", "spell", "skill", "gear"],
+    "types": ["weapon", "armor", "shield", "gear", "spell", "skill"],
     "weapon": {
       "damage": "1d6",
-      "damageType": "physical",
-      "range": "melee",
-      "actionCost": 1,
+      "damageType": "Cortante",
+      "range": "Corpo a Corpo",
+      "weight": 1.0,
+      "price": "10 KO",
+      "rarity": "Tier 1",
+      "quality": "Comum",
+      "attributes": "",
+      "properties": {
+        "twoHanded": false,
+        "light": false,
+        "finesse": false,
+        "thrown": false,
+        "reload": 0
+      },
       "equipped": false
     },
-    "spell": {
-      "cost": 1,
-      "resourceType": "primary",
-      "duration": "instant",
-      "area": ""
+    "armor": {
+      "armorType": "Media",
+      "physicalResist": 0,
+      "magicalResist": 0,
+      "specificResist": "",
+      "dodgePenalty": 0,
+      "stealthPenalty": 0,
+      "weight": 10.0,
+      "price": "50 KO",
+      "rarity": "Tier 2",
+      "quality": "Comum",
+      "attributes": "",
+      "equipped": false
+    },
+    "shield": {
+      "blockBonus": 0,
+      "counterBonus": 0,
+      "dodgePenalty": 0,
+      "damage": "1d6",
+      "damageType": "Contusivo",
+      "weight": 3.0,
+      "price": "30 KO",
+      "rarity": "Tier 1",
+      "quality": "Comum",
+      "attributes": "",
+      "equipped": false
+    },
+    "gear": {
+      "description": "",
+      "quantity": 1,
+      "weight": 0.5,
+      "price": "1 FP"
     }
   }
 }
