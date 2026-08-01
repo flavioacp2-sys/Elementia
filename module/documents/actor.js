@@ -39,5 +39,33 @@ export class ElementiaActor extends Actor {
     system.carryWeight.heavy = lightWeight * 2;
     system.carryWeight.lift = lightWeight * 2.5;
     system.carryWeight.drag = lightWeight * 3.5;
+
+    // ========================================================================
+    // 5. PROCESSAMENTO DE RAÇA E ORIGEM
+    // ========================================================================
+    
+    // Garante que os atributos base existam para evitar erros de inicialização
+    if (!system.attributes) {
+      system.attributes = { movement: { value: 6 }, vision: { value: "Normal" }, size: { value: "Médio" } };
+    }
+
+    // Procura no inventário do Ator se ele possui itens do tipo "race" ou "origin"
+    const raceItem = this.items.find(i => i.type === "race");
+    const originItem = this.items.find(i => i.type === "origin");
+
+    if (raceItem) {
+      const raceData = raceItem.system;
+      
+      // Aplica os dados da raça aos atributos vitais do personagem
+      system.attributes.movement.value = raceData.movement || 6;
+      system.attributes.vision.value = raceData.vision || "Normal";
+      system.attributes.size.value = raceData.size || "Médio";
+      
+      // Verifica regras específicas de movimentação, como as exceções de voo
+      // Exemplo: O Draconiano Asas Poderosas e o Feralis Errantis possuem regras mistas de voo/solo
+      if (raceData.movementAlt) {
+         system.attributes.movement.alt = raceData.movementAlt; // Para guardar "Voo 6" ou "Nadar 6"
+      }
+    }
   }
 }
