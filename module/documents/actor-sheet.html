@@ -21,438 +21,562 @@
         <!-- ABA 1: COMBATE E PERÍCIAS -->
         <div class="tab" data-group="primary" data-tab="combate">
             
-          <!-- PAINEL DE STATUS VITAIS E RECURSOS -->
-<section class="tactical-dashboard">
-    
-    <!-- Bloco 1: Vida e Nível -->
-    <div class="dashboard-group">
-        <div class="stat-box vital">
-            <label>Pontos de Vida</label>
-            <div class="stat-inputs">
-                <!-- Editável pelo jogador -->
-                <input name="system.attributes.health.value" type="text" value="{{system.attributes.health.value}}" data-dtype="Number"/>
-                <span class="separator"> / </span>
-                <!-- Editável (caso o mestre queira dar HP bônus) -->
-                <input name="system.attributes.health.max" type="text" value="{{system.attributes.health.max}}" data-dtype="Number"/>
-            </div>
-        </div>
+            <!-- PAINEL DE STATUS VITAIS E RECURSOS -->
+            <section class="tactical-dashboard">
+                
+                <!-- Bloco 1: Vida e Nível -->
+                <div class="dashboard-group">
+                    <div class="stat-box vital">
+                        <label>Pontos de Vida</label>
+                        <div class="stat-inputs">
+                            <input name="system.attributes.health.value" type="text" value="{{system.attributes.health.value}}" data-dtype="Number"/>
+                            <span class="separator"> / </span>
+                            <input name="system.attributes.health.max" type="text" value="{{system.attributes.health.max}}" data-dtype="Number"/>
+                        </div>
+                    </div>
 
-        <div class="stat-box level">
-            <label>Nível</label>
-            <input name="system.attributes.level.value" type="text" value="{{system.attributes.level.value}}" data-dtype="Number"/>
-        </div>
-    </div>
+                    <div class="stat-box level">
+                        <label>Nível</label>
+                        <input name="system.attributes.level.value" type="text" value="{{system.attributes.level.value}}" data-dtype="Number"/>
+                    </div>
+                </div>
 
-    <!-- Bloco 2: Ações e Reações -->
-    <div class="dashboard-group">
-        <div class="stat-box action-points">
-            <label>Pontos de Ação</label>
-            <div class="stat-inputs">
-                <input name="system.attributes.actionPoints.value" type="text" value="{{system.attributes.actionPoints.value}}" data-dtype="Number"/>
-                <span class="max-value"> / {{system.attributes.actionPoints.max}}</span>
-            </div>
-        </div>
+                <!-- Bloco 2: Ações e Reações -->
+                <div class="dashboard-group">
+                    <div class="stat-box action-points">
+                        <label>Pontos de Ação</label>
+                        <div class="stat-inputs">
+                            <input name="system.attributes.actionPoints.value" type="text" value="{{system.attributes.actionPoints.value}}" data-dtype="Number"/>
+                            <span class="max-value"> / {{system.attributes.actionPoints.max}}</span>
+                        </div>
+                    </div>
 
-        <div class="stat-box reaction-points">
-            <label>Reações</label>
-            <div class="stat-inputs">
-                <input name="system.attributes.reactions.value" type="text" value="{{system.attributes.reactions.value}}" data-dtype="Number"/>
-                <span class="max-value"> / {{system.attributes.reactions.max}}</span>
-            </div>
-        </div>
-    </div>
+                    <div class="stat-box reaction-points">
+                        <label>Reações</label>
+                        <div class="stat-inputs">
+                            <input name="system.attributes.reactions.value" type="text" value="{{system.attributes.reactions.value}}" data-dtype="Number"/>
+                            <span class="max-value"> / {{system.attributes.reactions.max}}</span>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- Bloco 3: Recursos Dinâmicos (Renderiza apenas se a Classe estiver equipada) -->
-    {{#if system.attributes.resources.primario.label}}
-    <div class="dashboard-group resources-group">
-        <div class="stat-box resource primary">
-            <label>{{system.attributes.resources.primario.label}}</label>
-            <div class="stat-inputs">
-                <input name="system.attributes.resources.primario.value" type="text" value="{{system.attributes.resources.primario.value}}" data-dtype="Number"/>
-                <!-- Valor Máximo é Apenas Leitura (Calculado no actor.js) -->
-                <span class="max-value calculated"> / {{system.attributes.resources.primario.max}}</span>
-            </div>
-        </div>
+                <!-- Bloco 3: Recursos Dinâmicos -->
+                {{#if system.attributes.resources.primario.label}}
+                <div class="dashboard-group resources-group">
+                    <div class="stat-box resource primary">
+                        <label>{{system.attributes.resources.primario.label}}</label>
+                        <div class="stat-inputs">
+                            <input name="system.attributes.resources.primario.value" type="text" value="{{system.attributes.resources.primario.value}}" data-dtype="Number"/>
+                            <span class="max-value calculated"> / {{system.attributes.resources.primario.max}}</span>
+                        </div>
+                    </div>
 
-        {{#if system.attributes.resources.secundario.label}}
-        <div class="stat-box resource secondary">
-            <label>{{system.attributes.resources.secundario.label}}</label>
-            <div class="stat-inputs">
-                <input name="system.attributes.resources.secundario.value" type="text" value="{{system.attributes.resources.secundario.value}}" data-dtype="Number"/>
-                <span class="max-value calculated"> / {{system.attributes.resources.secundario.max}}</span>
-            </div>
-        </div>
-        {{/if}}
-    </div>
-    {{/if}}
-</section>
+                    {{#if system.attributes.resources.secundario.label}}
+                    <div class="stat-box resource secondary">
+                        <label>{{system.attributes.resources.secundario.label}}</label>
+                        <div class="stat-inputs">
+                            <input name="system.attributes.resources.secundario.value" type="text" value="{{system.attributes.resources.secundario.value}}" data-dtype="Number"/>
+                            <span class="max-value calculated"> / {{system.attributes.resources.secundario.max}}</span>
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
+                {{/if}}
+            </section>
 
-<!-- PAINEL DE CARGA (Apenas Leitura) -->
-<section class="carry-weight-dashboard">
-    <h3 class="section-title">Capacidade de Carga (kg)</h3>
-    <div class="weight-grid">
-        <div class="weight-box leve">
-            <label>Leve</label>
-            <span>{{system.attributes.carga.leve}}</span>
-        </div>
-        <div class="weight-box media">
-            <label>Média</label>
-            <span>{{system.attributes.carga.media}}</span>
-        </div>
-        <div class="weight-box pesada">
-            <label>Pesada</label>
-            <span>{{system.attributes.carga.pesada}}</span>
-        </div>
-        <div class="weight-box erguer">
-            <label>Erguer</label>
-            <span>{{system.attributes.carga.erguer}}</span>
-        </div>
-    </div>
-</section>
+            <!-- PAINEL DE CARGA -->
+            <section class="carry-weight-dashboard">
+                <h3 class="section-title">Capacidade de Carga (kg)</h3>
+                <div class="weight-grid">
+                    <div class="weight-box leve">
+                        <label>Leve</label>
+                        <span>{{system.attributes.carga.leve}}</span>
+                    </div>
+                    <div class="weight-box media">
+                        <label>Média</label>
+                        <span>{{system.attributes.carga.media}}</span>
+                    </div>
+                    <div class="weight-box pesada">
+                        <label>Pesada</label>
+                        <span>{{system.attributes.carga.pesada}}</span>
+                    </div>
+                    <div class="weight-box erguer">
+                        <label>Erguer</label>
+                        <span>{{system.attributes.carga.erguer}}</span>
+                    </div>
+                </div>
+            </section>
 
-<!-- PAINEL DE PERÍCIAS -->
-<section class="skills-dashboard">
-    <h3 class="section-title">Perícias</h3>
-    
-    <div class="skills-grid">
-        
-        <!-- COLUNA 1: COMBATE -->
-        <div class="skill-category">
-            <h4 class="category-header">Combate</h4>
-            <div class="skill-list-header">
-                <span class="skill-name">Perícia</span>
-                <span class="skill-stat" title="Total Calculado">Tot</span>
-                <span class="skill-stat" title="Graduação">Grad</span>
-                <span class="skill-stat" title="Bônus Adicional">Bônus</span>
-            </div>
-            <ul class="skills-list">
-                <!-- Exemplo de Perícia Padrão -->
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="resilience" title="Rolar Resiliência"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Resiliência</span>
-                    <span class="skill-total">{{system.skills.combat.resilience.total}}</span>
-                    <input type="text" name="system.skills.combat.resilience.rank" value="{{system.skills.combat.resilience.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.combat.resilience.bonus" value="{{system.skills.combat.resilience.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="reflexes" title="Rolar Reflexos"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Reflexos</span>
-                    <span class="skill-total">{{system.skills.combat.reflexes.total}}</span>
-                    <input type="text" name="system.skills.combat.reflexes.rank" value="{{system.skills.combat.reflexes.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.combat.reflexes.bonus" value="{{system.skills.combat.reflexes.bonus}}" data-dtype="Number"/>
-                </li>
-                <!-- Exemplo de Perícia com Passiva (Percepção) -->
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="perception" title="Rolar Percepção"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Percepção <span class="passive-val">(Passiva: {{system.skills.combat.perception.passive}})</span></span>
-                    <span class="skill-total">{{system.skills.combat.perception.total}}</span>
-                    <input type="text" name="system.skills.combat.perception.rank" value="{{system.skills.combat.perception.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.combat.perception.bonus" value="{{system.skills.combat.perception.bonus}}" data-dtype="Number"/>
-                </li>
-                <!-- Adicione as outras de combate aqui (riding, stealth, weaponSkill, brawling, etc) seguindo a mesma estrutura -->
+            <!-- PAINEL DE PERÍCIAS -->
+            <section class="skills-dashboard">
+                <h3 class="section-title">Perícias</h3>
+                <div class="skills-grid">
+                    
+                    <!-- COLUNA 1: COMBATE -->
+                    <div class="skill-category">
+                        <h4 class="category-header">Combate</h4>
+                        <div class="skill-list-header">
+                            <span class="skill-name">Perícia</span>
+                            <span class="skill-stat" title="Total Calculado">Tot</span>
+                            <span class="skill-stat" title="Graduação">Grad</span>
+                            <span class="skill-stat" title="Bônus Adicional">Bônus</span>
+                        </div>
+                        <ul class="skills-list">
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="brawling" title="Rolar Luta"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Luta</span>
+                                <span class="skill-total">{{system.skills.combat.brawling.total}}</span>
+                                <input type="text" name="system.skills.combat.brawling.rank" value="{{system.skills.combat.brawling.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.combat.brawling.bonus" value="{{system.skills.combat.brawling.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="perception" title="Rolar Percepção"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Percepção <span class="passive-val">(Passiva: {{system.skills.combat.perception.passive}})</span></span>
+                                <span class="skill-total">{{system.skills.combat.perception.total}}</span>
+                                <input type="text" name="system.skills.combat.perception.rank" value="{{system.skills.combat.perception.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.combat.perception.bonus" value="{{system.skills.combat.perception.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="precision" title="Rolar Precisão"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Precisão</span>
+                                <span class="skill-total">{{system.skills.combat.precision.total}}</span>
+                                <input type="text" name="system.skills.combat.precision.rank" value="{{system.skills.combat.precision.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.combat.precision.bonus" value="{{system.skills.combat.precision.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="reflexes" title="Rolar Reflexos"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Reflexos</span>
+                                <span class="skill-total">{{system.skills.combat.reflexes.total}}</span>
+                                <input type="text" name="system.skills.combat.reflexes.rank" value="{{system.skills.combat.reflexes.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.combat.reflexes.bonus" value="{{system.skills.combat.reflexes.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="resilience" title="Rolar Resiliência"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Resiliência</span>
+                                <span class="skill-total">{{system.skills.combat.resilience.total}}</span>
+                                <input type="text" name="system.skills.combat.resilience.rank" value="{{system.skills.combat.resilience.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.combat.resilience.bonus" value="{{system.skills.combat.resilience.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="riding" title="Rolar Cavalgar"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Cavalgar</span>
+                                <span class="skill-total">{{system.skills.combat.riding.total}}</span>
+                                <input type="text" name="system.skills.combat.riding.rank" value="{{system.skills.combat.riding.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.combat.riding.bonus" value="{{system.skills.combat.riding.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="stealth" title="Rolar Furtividade"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Furtividade</span>
+                                <span class="skill-total">{{system.skills.combat.stealth.total}}</span>
+                                <input type="text" name="system.skills.combat.stealth.rank" value="{{system.skills.combat.stealth.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.combat.stealth.bonus" value="{{system.skills.combat.stealth.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="weaponSkill" title="Rolar Habilidade com Armas"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Habilidade c/ Armas</span>
+                                <span class="skill-total">{{system.skills.combat.weaponSkill.total}}</span>
+                                <input type="text" name="system.skills.combat.weaponSkill.rank" value="{{system.skills.combat.weaponSkill.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.combat.weaponSkill.bonus" value="{{system.skills.combat.weaponSkill.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="willpower" title="Rolar Vontade"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Vontade</span>
+                                <span class="skill-total">{{system.skills.combat.willpower.total}}</span>
+                                <input type="text" name="system.skills.combat.willpower.rank" value="{{system.skills.combat.willpower.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.combat.willpower.bonus" value="{{system.skills.combat.willpower.bonus}}" data-dtype="Number"/>
+                            </li>
 
-                <!-- PERÍCIAS DE CLASSE (Tratadas como Combate) -->
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="arcanism" title="Rolar Arcanismo"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Arcanismo</span>
-                    <span class="skill-total">{{system.skills.combat.arcanism.total}}</span>
-                    <input type="text" name="system.skills.combat.arcanism.rank" value="{{system.skills.combat.arcanism.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.combat.arcanism.bonus" value="{{system.skills.combat.arcanism.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="arcaneRitual" title="Rolar Ritual Arcano"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Ritual Arcano</span>
-                    <span class="skill-total">{{system.skills.combat.arcaneRitual.total}}</span>
-                    <input type="text" name="system.skills.combat.arcaneRitual.rank" value="{{system.skills.combat.arcaneRitual.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.combat.arcaneRitual.bonus" value="{{system.skills.combat.arcaneRitual.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="rage" title="Rolar Fúria"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Fúria</span>
-                    <span class="skill-total">{{system.skills.combat.rage.total}}</span>
-                    <input type="text" name="system.skills.combat.rage.rank" value="{{system.skills.combat.rage.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.combat.rage.bonus" value="{{system.skills.combat.rage.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="magicalMusic" title="Rolar Música Mágica"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Música Mágica</span>
-                    <span class="skill-total">{{system.skills.combat.magicalMusic.total}}</span>
-                    <input type="text" name="system.skills.combat.magicalMusic.rank" value="{{system.skills.combat.magicalMusic.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.combat.magicalMusic.bonus" value="{{system.skills.combat.magicalMusic.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="faith" title="Rolar Fé"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Fé</span>
-                    <span class="skill-total">{{system.skills.combat.faith.total}}</span>
-                    <input type="text" name="system.skills.combat.faith.rank" value="{{system.skills.combat.faith.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.combat.faith.bonus" value="{{system.skills.combat.faith.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="divineRitual" title="Rolar Ritual Divino"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Ritual Divino</span>
-                    <span class="skill-total">{{system.skills.combat.divineRitual.total}}</span>
-                    <input type="text" name="system.skills.combat.divineRitual.rank" value="{{system.skills.combat.divineRitual.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.combat.divineRitual.bonus" value="{{system.skills.combat.divineRitual.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="herbalism" title="Rolar Herbalismo"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Herbalismo</span>
-                    <span class="skill-total">{{system.skills.combat.herbalism.total}}</span>
-                    <input type="text" name="system.skills.combat.herbalism.rank" value="{{system.skills.combat.herbalism.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.combat.herbalism.bonus" value="{{system.skills.combat.herbalism.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="druidicRitual" title="Rolar Ritual Druídico"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Ritual Druídico</span>
-                    <span class="skill-total">{{system.skills.combat.druidicRitual.total}}</span>
-                    <input type="text" name="system.skills.combat.druidicRitual.rank" value="{{system.skills.combat.druidicRitual.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.combat.druidicRitual.bonus" value="{{system.skills.combat.druidicRitual.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="chakra" title="Rolar Chakra"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Chakra</span>
-                    <span class="skill-total">{{system.skills.combat.chakra.total}}</span>
-                    <input type="text" name="system.skills.combat.chakra.rank" value="{{system.skills.combat.chakra.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.combat.chakra.bonus" value="{{system.skills.combat.chakra.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="divineBlessing" title="Rolar Benção Divina"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Benção Divina</span>
-                    <span class="skill-total">{{system.skills.combat.divineBlessing.total}}</span>
-                    <input type="text" name="system.skills.combat.divineBlessing.rank" value="{{system.skills.combat.divineBlessing.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.combat.divineBlessing.bonus" value="{{system.skills.combat.divineBlessing.bonus}}" data-dtype="Number"/>
-                </li>
-            </ul>
-        </div>
+                            <!-- PERÍCIAS DE CLASSE (Tratadas como Combate) -->
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="arcanism" title="Rolar Arcanismo"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Arcanismo</span>
+                                <span class="skill-total">{{system.skills.combat.arcanism.total}}</span>
+                                <input type="text" name="system.skills.combat.arcanism.rank" value="{{system.skills.combat.arcanism.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.combat.arcanism.bonus" value="{{system.skills.combat.arcanism.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="arcaneRitual" title="Rolar Ritual Arcano"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Ritual Arcano</span>
+                                <span class="skill-total">{{system.skills.combat.arcaneRitual.total}}</span>
+                                <input type="text" name="system.skills.combat.arcaneRitual.rank" value="{{system.skills.combat.arcaneRitual.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.combat.arcaneRitual.bonus" value="{{system.skills.combat.arcaneRitual.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="chakra" title="Rolar Chakra"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Chakra</span>
+                                <span class="skill-total">{{system.skills.combat.chakra.total}}</span>
+                                <input type="text" name="system.skills.combat.chakra.rank" value="{{system.skills.combat.chakra.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.combat.chakra.bonus" value="{{system.skills.combat.chakra.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="divineBlessing" title="Rolar Benção Divina"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Benção Divina</span>
+                                <span class="skill-total">{{system.skills.combat.divineBlessing.total}}</span>
+                                <input type="text" name="system.skills.combat.divineBlessing.rank" value="{{system.skills.combat.divineBlessing.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.combat.divineBlessing.bonus" value="{{system.skills.combat.divineBlessing.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="divineRitual" title="Rolar Ritual Divino"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Ritual Divino</span>
+                                <span class="skill-total">{{system.skills.combat.divineRitual.total}}</span>
+                                <input type="text" name="system.skills.combat.divineRitual.rank" value="{{system.skills.combat.divineRitual.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.combat.divineRitual.bonus" value="{{system.skills.combat.divineRitual.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="druidicRitual" title="Rolar Ritual Druídico"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Ritual Druídico</span>
+                                <span class="skill-total">{{system.skills.combat.druidicRitual.total}}</span>
+                                <input type="text" name="system.skills.combat.druidicRitual.rank" value="{{system.skills.combat.druidicRitual.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.combat.druidicRitual.bonus" value="{{system.skills.combat.druidicRitual.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="faith" title="Rolar Fé"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Fé</span>
+                                <span class="skill-total">{{system.skills.combat.faith.total}}</span>
+                                <input type="text" name="system.skills.combat.faith.rank" value="{{system.skills.combat.faith.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.combat.faith.bonus" value="{{system.skills.combat.faith.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="herbalism" title="Rolar Herbalismo"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Herbalismo</span>
+                                <span class="skill-total">{{system.skills.combat.herbalism.total}}</span>
+                                <input type="text" name="system.skills.combat.herbalism.rank" value="{{system.skills.combat.herbalism.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.combat.herbalism.bonus" value="{{system.skills.combat.herbalism.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="magicalMusic" title="Rolar Música Mágica"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Música Mágica</span>
+                                <span class="skill-total">{{system.skills.combat.magicalMusic.total}}</span>
+                                <input type="text" name="system.skills.combat.magicalMusic.rank" value="{{system.skills.combat.magicalMusic.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.combat.magicalMusic.bonus" value="{{system.skills.combat.magicalMusic.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="marksmanship" title="Rolar Pontaria"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Pontaria</span>
+                                <span class="skill-total">{{system.skills.combat.marksmanship.total}}</span>
+                                <input type="text" name="system.skills.combat.marksmanship.rank" value="{{system.skills.combat.marksmanship.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.combat.marksmanship.bonus" value="{{system.skills.combat.marksmanship.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="rage" title="Rolar Fúria"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Fúria</span>
+                                <span class="skill-total">{{system.skills.combat.rage.total}}</span>
+                                <input type="text" name="system.skills.combat.rage.rank" value="{{system.skills.combat.rage.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.combat.rage.bonus" value="{{system.skills.combat.rage.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="runeMagic" title="Rolar Magia Rúnica"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Magia Rúnica</span>
+                                <span class="skill-total">{{system.skills.combat.runeMagic.total}}</span>
+                                <input type="text" name="system.skills.combat.runeMagic.rank" value="{{system.skills.combat.runeMagic.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.combat.runeMagic.bonus" value="{{system.skills.combat.runeMagic.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="thievery" title="Rolar Ladinagem"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Ladinagem</span>
+                                <span class="skill-total">{{system.skills.combat.thievery.total}}</span>
+                                <input type="text" name="system.skills.combat.thievery.rank" value="{{system.skills.combat.thievery.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.combat.thievery.bonus" value="{{system.skills.combat.thievery.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="training" title="Rolar Treinamento"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Treinamento</span>
+                                <span class="skill-total">{{system.skills.combat.training.total}}</span>
+                                <input type="text" name="system.skills.combat.training.rank" value="{{system.skills.combat.training.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.combat.training.bonus" value="{{system.skills.combat.training.bonus}}" data-dtype="Number"/>
+                            </li>
+                        </ul>
+                    </div>
 
-                <!-- COLUNA 2: GERAIS -->
-        <div class="skill-category">
-            <h4 class="category-header">Gerais</h4>
-            <div class="skill-list-header">
-                <span class="skill-name">Perícia</span>
-                <span class="skill-stat" title="Total Calculado">Tot</span>
-                <span class="skill-stat" title="Graduação">Grad</span>
-                <span class="skill-stat" title="Bônus Adicional">Bônus</span>
-            </div>
-            <ul class="skills-list">
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="athletics" title="Rolar Atletismo"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Atletismo</span>
-                    <span class="skill-total">{{system.skills.general.athletics.total}}</span>
-                    <input type="text" name="system.skills.general.athletics.rank" value="{{system.skills.general.athletics.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.general.athletics.bonus" value="{{system.skills.general.athletics.bonus}}" data-dtype="Number"/>
-                </li>
-                <!-- Exemplo com Passiva (Intuição) -->
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="insight" title="Rolar Intuição"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Intuição <span class="passive-val">(Passiva: {{system.skills.general.insight.passive}})</span></span>
-                    <span class="skill-total">{{system.skills.general.insight.total}}</span>
-                    <input type="text" name="system.skills.general.insight.rank" value="{{system.skills.general.insight.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.general.insight.bonus" value="{{system.skills.general.insight.bonus}}" data-dtype="Number"/>
-                </li>
-                <!-- Adicione as outras gerais aqui (acrobatics, animalHandling, bluff, etc) -->
-            </ul>
-        </div>
-        
-        <!-- COLUNA 3: CONHECIMENTO -->
-        <div class="skill-category">
-            <h4 class="category-header">Conhecimento</h4>
-            <div class="skill-list-header">
-                <span class="skill-name">Perícia</span>
-                <span class="skill-stat" title="Total Calculado">Tot</span>
-                <span class="skill-stat" title="Graduação">Grad</span>
-                <span class="skill-stat" title="Bônus Adicional">Bônus</span>
-            </div>
-            <ul class="skills-list">
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="bestiary" title="Rolar Bestiário"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Bestiário</span>
-                    <span class="skill-total">{{system.skills.knowledge.bestiary.total}}</span>
-                    <input type="text" name="system.skills.knowledge.bestiary.rank" value="{{system.skills.knowledge.bestiary.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.knowledge.bestiary.bonus" value="{{system.skills.knowledge.bestiary.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="geography" title="Rolar Geografia"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Geografia</span>
-                    <span class="skill-total">{{system.skills.knowledge.geography.total}}</span>
-                    <input type="text" name="system.skills.knowledge.geography.rank" value="{{system.skills.knowledge.geography.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.knowledge.geography.bonus" value="{{system.skills.knowledge.geography.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="glyphs" title="Rolar Glifos"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Glifos</span>
-                    <span class="skill-total">{{system.skills.knowledge.glyphs.total}}</span>
-                    <input type="text" name="system.skills.knowledge.glyphs.rank" value="{{system.skills.knowledge.glyphs.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.knowledge.glyphs.bonus" value="{{system.skills.knowledge.glyphs.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="heraldry" title="Rolar Heráldica"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Heráldica</span>
-                    <span class="skill-total">{{system.skills.knowledge.heraldry.total}}</span>
-                    <input type="text" name="system.skills.knowledge.heraldry.rank" value="{{system.skills.knowledge.heraldry.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.knowledge.heraldry.bonus" value="{{system.skills.knowledge.heraldry.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="history" title="Rolar História"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">História</span>
-                    <span class="skill-total">{{system.skills.knowledge.history.total}}</span>
-                    <input type="text" name="system.skills.knowledge.history.rank" value="{{system.skills.knowledge.history.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.knowledge.history.bonus" value="{{system.skills.knowledge.history.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="languages" title="Rolar Idiomas"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Idiomas</span>
-                    <span class="skill-total">{{system.skills.knowledge.languages.total}}</span>
-                    <input type="text" name="system.skills.knowledge.languages.rank" value="{{system.skills.knowledge.languages.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.knowledge.languages.bonus" value="{{system.skills.knowledge.languages.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="medicine" title="Rolar Medicina"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Medicina</span>
-                    <span class="skill-total">{{system.skills.knowledge.medicine.total}}</span>
-                    <input type="text" name="system.skills.knowledge.medicine.rank" value="{{system.skills.knowledge.medicine.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.knowledge.medicine.bonus" value="{{system.skills.knowledge.medicine.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="nature" title="Rolar Natureza"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Natureza</span>
-                    <span class="skill-total">{{system.skills.knowledge.nature.total}}</span>
-                    <input type="text" name="system.skills.knowledge.nature.rank" value="{{system.skills.knowledge.nature.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.knowledge.nature.bonus" value="{{system.skills.knowledge.nature.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="religion" title="Rolar Religião"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Religião</span>
-                    <span class="skill-total">{{system.skills.knowledge.religion.total}}</span>
-                    <input type="text" name="system.skills.knowledge.religion.rank" value="{{system.skills.knowledge.religion.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.knowledge.religion.bonus" value="{{system.skills.knowledge.religion.bonus}}" data-dtype="Number"/>
-                </li>
-            </ul>
-        </div>
+                    <!-- COLUNA 2: GERAIS -->
+                    <div class="skill-category">
+                        <h4 class="category-header">Gerais</h4>
+                        <div class="skill-list-header">
+                            <span class="skill-name">Perícia</span>
+                            <span class="skill-stat" title="Total Calculado">Tot</span>
+                            <span class="skill-stat" title="Graduação">Grad</span>
+                            <span class="skill-stat" title="Bônus Adicional">Bônus</span>
+                        </div>
+                        <ul class="skills-list">
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="acrobatics" title="Rolar Acrobacia"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Acrobacia</span>
+                                <span class="skill-total">{{system.skills.general.acrobatics.total}}</span>
+                                <input type="text" name="system.skills.general.acrobatics.rank" value="{{system.skills.general.acrobatics.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.general.acrobatics.bonus" value="{{system.skills.general.acrobatics.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="animalHandling" title="Rolar Adestrar Animais"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Adestrar Animais</span>
+                                <span class="skill-total">{{system.skills.general.animalHandling.total}}</span>
+                                <input type="text" name="system.skills.general.animalHandling.rank" value="{{system.skills.general.animalHandling.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.general.animalHandling.bonus" value="{{system.skills.general.animalHandling.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="athletics" title="Rolar Atletismo"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Atletismo</span>
+                                <span class="skill-total">{{system.skills.general.athletics.total}}</span>
+                                <input type="text" name="system.skills.general.athletics.rank" value="{{system.skills.general.athletics.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.general.athletics.bonus" value="{{system.skills.general.athletics.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="bluff" title="Rolar Blefe"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Blefe</span>
+                                <span class="skill-total">{{system.skills.general.bluff.total}}</span>
+                                <input type="text" name="system.skills.general.bluff.rank" value="{{system.skills.general.bluff.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.general.bluff.bonus" value="{{system.skills.general.bluff.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="diplomacy" title="Rolar Diplomacia"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Diplomacia</span>
+                                <span class="skill-total">{{system.skills.general.diplomacy.total}}</span>
+                                <input type="text" name="system.skills.general.diplomacy.rank" value="{{system.skills.general.diplomacy.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.general.diplomacy.bonus" value="{{system.skills.general.diplomacy.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="insight" title="Rolar Intuição"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Intuição <span class="passive-val">(Passiva: {{system.skills.general.insight.passive}})</span></span>
+                                <span class="skill-total">{{system.skills.general.insight.total}}</span>
+                                <input type="text" name="system.skills.general.insight.rank" value="{{system.skills.general.insight.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.general.insight.bonus" value="{{system.skills.general.insight.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="intimidation" title="Rolar Intimidação"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Intimidação</span>
+                                <span class="skill-total">{{system.skills.general.intimidation.total}}</span>
+                                <input type="text" name="system.skills.general.intimidation.rank" value="{{system.skills.general.intimidation.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.general.intimidation.bonus" value="{{system.skills.general.intimidation.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="investigation" title="Rolar Investigação"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Investigação <span class="passive-val">(Passiva: {{system.skills.general.investigation.passive}})</span></span>
+                                <span class="skill-total">{{system.skills.general.investigation.total}}</span>
+                                <input type="text" name="system.skills.general.investigation.rank" value="{{system.skills.general.investigation.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.general.investigation.bonus" value="{{system.skills.general.investigation.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="negotiation" title="Rolar Negociar"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Negociar</span>
+                                <span class="skill-total">{{system.skills.general.negotiation.total}}</span>
+                                <input type="text" name="system.skills.general.negotiation.rank" value="{{system.skills.general.negotiation.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.general.negotiation.bonus" value="{{system.skills.general.negotiation.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="seduction" title="Rolar Sedução"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Sedução</span>
+                                <span class="skill-total">{{system.skills.general.seduction.total}}</span>
+                                <input type="text" name="system.skills.general.seduction.rank" value="{{system.skills.general.seduction.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.general.seduction.bonus" value="{{system.skills.general.seduction.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="streetwise" title="Rolar Manha"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Manha</span>
+                                <span class="skill-total">{{system.skills.general.streetwise.total}}</span>
+                                <input type="text" name="system.skills.general.streetwise.rank" value="{{system.skills.general.streetwise.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.general.streetwise.bonus" value="{{system.skills.general.streetwise.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="survival" title="Rolar Sobrevivência"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Sobrevivência</span>
+                                <span class="skill-total">{{system.skills.general.survival.total}}</span>
+                                <input type="text" name="system.skills.general.survival.rank" value="{{system.skills.general.survival.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.general.survival.bonus" value="{{system.skills.general.survival.bonus}}" data-dtype="Number"/>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- COLUNA 3: CONHECIMENTO -->
+                    <div class="skill-category">
+                        <h4 class="category-header">Conhecimento</h4>
+                        <div class="skill-list-header">
+                            <span class="skill-name">Perícia</span>
+                            <span class="skill-stat" title="Total Calculado">Tot</span>
+                            <span class="skill-stat" title="Graduação">Grad</span>
+                            <span class="skill-stat" title="Bônus Adicional">Bônus</span>
+                        </div>
+                        <ul class="skills-list">
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="bestiary" title="Rolar Bestiário"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Bestiário</span>
+                                <span class="skill-total">{{system.skills.knowledge.bestiary.total}}</span>
+                                <input type="text" name="system.skills.knowledge.bestiary.rank" value="{{system.skills.knowledge.bestiary.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.knowledge.bestiary.bonus" value="{{system.skills.knowledge.bestiary.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="geography" title="Rolar Geografia"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Geografia</span>
+                                <span class="skill-total">{{system.skills.knowledge.geography.total}}</span>
+                                <input type="text" name="system.skills.knowledge.geography.rank" value="{{system.skills.knowledge.geography.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.knowledge.geography.bonus" value="{{system.skills.knowledge.geography.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="glyphs" title="Rolar Glifos"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Glifos</span>
+                                <span class="skill-total">{{system.skills.knowledge.glyphs.total}}</span>
+                                <input type="text" name="system.skills.knowledge.glyphs.rank" value="{{system.skills.knowledge.glyphs.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.knowledge.glyphs.bonus" value="{{system.skills.knowledge.glyphs.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="heraldry" title="Rolar Heráldica"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Heráldica</span>
+                                <span class="skill-total">{{system.skills.knowledge.heraldry.total}}</span>
+                                <input type="text" name="system.skills.knowledge.heraldry.rank" value="{{system.skills.knowledge.heraldry.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.knowledge.heraldry.bonus" value="{{system.skills.knowledge.heraldry.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="history" title="Rolar História"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">História</span>
+                                <span class="skill-total">{{system.skills.knowledge.history.total}}</span>
+                                <input type="text" name="system.skills.knowledge.history.rank" value="{{system.skills.knowledge.history.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.knowledge.history.bonus" value="{{system.skills.knowledge.history.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="languages" title="Rolar Idiomas"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Idiomas</span>
+                                <span class="skill-total">{{system.skills.knowledge.languages.total}}</span>
+                                <input type="text" name="system.skills.knowledge.languages.rank" value="{{system.skills.knowledge.languages.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.knowledge.languages.bonus" value="{{system.skills.knowledge.languages.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="medicine" title="Rolar Medicina"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Medicina</span>
+                                <span class="skill-total">{{system.skills.knowledge.medicine.total}}</span>
+                                <input type="text" name="system.skills.knowledge.medicine.rank" value="{{system.skills.knowledge.medicine.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.knowledge.medicine.bonus" value="{{system.skills.knowledge.medicine.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="nature" title="Rolar Natureza"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Natureza</span>
+                                <span class="skill-total">{{system.skills.knowledge.nature.total}}</span>
+                                <input type="text" name="system.skills.knowledge.nature.rank" value="{{system.skills.knowledge.nature.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.knowledge.nature.bonus" value="{{system.skills.knowledge.nature.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="religion" title="Rolar Religião"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Religião</span>
+                                <span class="skill-total">{{system.skills.knowledge.religion.total}}</span>
+                                <input type="text" name="system.skills.knowledge.religion.rank" value="{{system.skills.knowledge.religion.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.knowledge.religion.bonus" value="{{system.skills.knowledge.religion.bonus}}" data-dtype="Number"/>
+                            </li>
+                        </ul>
+                    </div>
 
-        <!-- COLUNA 4: OFÍCIO -->
-        <div class="skill-category">
-            <h4 class="category-header">Ofício</h4>
-            <div class="skill-list-header">
-                <span class="skill-name">Perícia</span>
-                <span class="skill-stat" title="Total Calculado">Tot</span>
-                <span class="skill-stat" title="Graduação">Grad</span>
-                <span class="skill-stat" title="Bônus Adicional">Bônus</span>
-            </div>
-            <ul class="skills-list">
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="alchemist" title="Rolar Alquimista"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Alquimista</span>
-                    <span class="skill-total">{{system.skills.crafting.alchemist.total}}</span>
-                    <input type="text" name="system.skills.crafting.alchemist.rank" value="{{system.skills.crafting.alchemist.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.crafting.alchemist.bonus" value="{{system.skills.crafting.alchemist.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="trapper" title="Rolar Armadilheiro"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Armadilheiro</span>
-                    <span class="skill-total">{{system.skills.crafting.trapper.total}}</span>
-                    <input type="text" name="system.skills.crafting.trapper.rank" value="{{system.skills.crafting.trapper.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.crafting.trapper.bonus" value="{{system.skills.crafting.trapper.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="artisan" title="Rolar Artesão"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Artesão</span>
-                    <span class="skill-total">{{system.skills.crafting.artisan.total}}</span>
-                    <input type="text" name="system.skills.crafting.artisan.rank" value="{{system.skills.crafting.artisan.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.crafting.artisan.bonus" value="{{system.skills.crafting.artisan.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="artist" title="Rolar Artista"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Artista</span>
-                    <span class="skill-total">{{system.skills.crafting.artist.total}}</span>
-                    <input type="text" name="system.skills.crafting.artist.rank" value="{{system.skills.crafting.artist.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.crafting.artist.bonus" value="{{system.skills.crafting.artist.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="apothecary" title="Rolar Boticário"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Boticário</span>
-                    <span class="skill-total">{{system.skills.crafting.apothecary.total}}</span>
-                    <input type="text" name="system.skills.crafting.apothecary.rank" value="{{system.skills.crafting.apothecary.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.crafting.apothecary.bonus" value="{{system.skills.crafting.apothecary.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="enchanter" title="Rolar Encantador"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Encantador</span>
-                    <span class="skill-total">{{system.skills.crafting.enchanter.total}}</span>
-                    <input type="text" name="system.skills.crafting.enchanter.rank" value="{{system.skills.crafting.enchanter.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.crafting.enchanter.bonus" value="{{system.skills.crafting.enchanter.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="blacksmith" title="Rolar Ferreiro"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Ferreiro</span>
-                    <span class="skill-total">{{system.skills.crafting.blacksmith.total}}</span>
-                    <input type="text" name="system.skills.crafting.blacksmith.rank" value="{{system.skills.crafting.blacksmith.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.crafting.blacksmith.bonus" value="{{system.skills.crafting.blacksmith.bonus}}" data-dtype="Number"/>
-                </li>
-                <li class="skill-row">
-                    <a class="skill-roll" data-skill="inventor" title="Rolar Inventor"><i class="fas fa-dice-d20"></i></a>
-                    <span class="skill-name">Inventor</span>
-                    <span class="skill-total">{{system.skills.crafting.inventor.total}}</span>
-                    <input type="text" name="system.skills.crafting.inventor.rank" value="{{system.skills.crafting.inventor.rank}}" data-dtype="Number"/>
-                    <input type="text" name="system.skills.crafting.inventor.bonus" value="{{system.skills.crafting.inventor.bonus}}" data-dtype="Number"/>
-                </li>
-            </ul>
-        </div>
+                    <!-- COLUNA 4: OFÍCIO -->
+                    <div class="skill-category">
+                        <h4 class="category-header">Ofício</h4>
+                        <div class="skill-list-header">
+                            <span class="skill-name">Perícia</span>
+                            <span class="skill-stat" title="Total Calculado">Tot</span>
+                            <span class="skill-stat" title="Graduação">Grad</span>
+                            <span class="skill-stat" title="Bônus Adicional">Bônus</span>
+                        </div>
+                        <ul class="skills-list">
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="alchemist" title="Rolar Alquimista"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Alquimista</span>
+                                <span class="skill-total">{{system.skills.crafting.alchemist.total}}</span>
+                                <input type="text" name="system.skills.crafting.alchemist.rank" value="{{system.skills.crafting.alchemist.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.crafting.alchemist.bonus" value="{{system.skills.crafting.alchemist.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="trapper" title="Rolar Armadilheiro"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Armadilheiro</span>
+                                <span class="skill-total">{{system.skills.crafting.trapper.total}}</span>
+                                <input type="text" name="system.skills.crafting.trapper.rank" value="{{system.skills.crafting.trapper.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.crafting.trapper.bonus" value="{{system.skills.crafting.trapper.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="artisan" title="Rolar Artesão"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Artesão</span>
+                                <span class="skill-total">{{system.skills.crafting.artisan.total}}</span>
+                                <input type="text" name="system.skills.crafting.artisan.rank" value="{{system.skills.crafting.artisan.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.crafting.artisan.bonus" value="{{system.skills.crafting.artisan.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="artist" title="Rolar Artista"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Artista</span>
+                                <span class="skill-total">{{system.skills.crafting.artist.total}}</span>
+                                <input type="text" name="system.skills.crafting.artist.rank" value="{{system.skills.crafting.artist.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.crafting.artist.bonus" value="{{system.skills.crafting.artist.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="apothecary" title="Rolar Boticário"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Boticário</span>
+                                <span class="skill-total">{{system.skills.crafting.apothecary.total}}</span>
+                                <input type="text" name="system.skills.crafting.apothecary.rank" value="{{system.skills.crafting.apothecary.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.crafting.apothecary.bonus" value="{{system.skills.crafting.apothecary.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="enchanter" title="Rolar Encantador"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Encantador</span>
+                                <span class="skill-total">{{system.skills.crafting.enchanter.total}}</span>
+                                <input type="text" name="system.skills.crafting.enchanter.rank" value="{{system.skills.crafting.enchanter.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.crafting.enchanter.bonus" value="{{system.skills.crafting.enchanter.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="blacksmith" title="Rolar Ferreiro"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Ferreiro</span>
+                                <span class="skill-total">{{system.skills.crafting.blacksmith.total}}</span>
+                                <input type="text" name="system.skills.crafting.blacksmith.rank" value="{{system.skills.crafting.blacksmith.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.crafting.blacksmith.bonus" value="{{system.skills.crafting.blacksmith.bonus}}" data-dtype="Number"/>
+                            </li>
+                            <li class="skill-row">
+                                <a class="skill-roll" data-skill="inventor" title="Rolar Inventor"><i class="fas fa-dice-d20"></i></a>
+                                <span class="skill-name">Inventor</span>
+                                <span class="skill-total">{{system.skills.crafting.inventor.total}}</span>
+                                <input type="text" name="system.skills.crafting.inventor.rank" value="{{system.skills.crafting.inventor.rank}}" data-dtype="Number"/>
+                                <input type="text" name="system.skills.crafting.inventor.bonus" value="{{system.skills.crafting.inventor.bonus}}" data-dtype="Number"/>
+                            </li>
+                        </ul>
+                    </div>
 
-    </div>
-</section>
-
-
+                </div>
+            </section>
         </div>
 
         <!-- ABA 2: HABILIDADES (Raciais e de Classe) -->
         <div class="tab" data-group="primary" data-tab="habilidades">
-            
-          <hr>
+            <div class="habilidades-container">
+                <!-- HABILIDADES RACIAIS -->
+                <section class="habilidades-group">
+                    <h3 class="group-header">Habilidades Raciais</h3>
+                    <ul class="item-list">
+                        {{#each habilidadesRaciais as |item id|}}
+                        <li class="item" data-item-id="{{item._id}}">
+                            <div class="item-name">
+                                <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+                                <h4>{{item.name}}</h4>
+                            </div>
+                            <div class="item-controls">
+                                <a class="item-control item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-delete" title="Deletar"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </section>
 
-<!-- SEPARAÇÃO DE HABILIDADES -->
-<div class="habilidades-container">
-    
-    <!-- HABILIDADES RACIAIS -->
-    <section class="habilidades-group">
-        <h3 class="group-header">Habilidades Raciais</h3>
-        <ul class="item-list">
-            {{#each habilidadesRaciais as |item id|}}
-            <li class="item" data-item-id="{{item._id}}">
-                <div class="item-name">
-                    <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
-                    <h4>{{item.name}}</h4>
-                </div>
-                <div class="item-controls">
-                    <a class="item-control item-edit" title="Editar"><i class="fas fa-edit"></i></a>
-                    <a class="item-control item-delete" title="Deletar"><i class="fas fa-trash"></i></a>
-                </div>
-            </li>
-            {{/each}}
-        </ul>
-    </section>
-
-    <!-- HABILIDADES DE CLASSE -->
-    <section class="habilidades-group">
-        <h3 class="group-header">Habilidades de Classe</h3>
-        <ul class="item-list">
-            {{#each habilidadesClasse as |item id|}}
-            <li class="item" data-item-id="{{item._id}}">
-                <div class="item-name">
-                    <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
-                    <h4>{{item.name}}</h4>
-                    <span class="action-cost">{{item.system.actionCost}}</span>
-                    <span class="resource-cost">{{item.system.resourceCost}}</span>
-                </div>
-                <!-- Controles idênticos omitidos para brevidade -->
-            </li>
-            {{/each}}
-        </ul>
-    </section>
-
-</div>
-
-
+                <!-- HABILIDADES DE CLASSE -->
+                <section class="habilidades-group">
+                    <h3 class="group-header">Habilidades de Classe</h3>
+                    <ul class="item-list">
+                        {{#each habilidadesClasse as |item id|}}
+                        <li class="item" data-item-id="{{item._id}}">
+                            <div class="item-name">
+                                <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+                                <h4>{{item.name}}</h4>
+                                <span class="action-cost">{{item.system.actionCost}}</span>
+                                <span class="resource-cost">{{item.system.resourceCost}}</span>
+                            </div>
+                            <div class="item-controls">
+                                <a class="item-control item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-delete" title="Deletar"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </section>
+            </div>
         </div>
 
         <!-- ABA 3: INVENTÁRIO (Em branco por enquanto) -->
