@@ -123,3 +123,128 @@
     font-weight: bold;
     color: #333;
 }
+
+/* ========================================== */
+/* PAINEL DE PERÍCIAS                         */
+/* ========================================== */
+
+.skills-dashboard {
+    margin-bottom: 20px;
+}
+
+/* O grid força duas colunas com um bom espaçamento entre elas */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.skill-category {
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid #c9c7b8;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.category-header {
+    text-align: center;
+    background: #e9e8e0;
+    margin: -10px -10px 10px -10px;
+    padding: 6px;
+    border-bottom: 1px solid #c9c7b8;
+    border-radius: 5px 5px 0 0;
+    font-weight: bold;
+    color: #4a4a4a;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+/* Cabeçalho das colunas (Tot, Grad, Bônus) */
+.skill-list-header {
+    display: flex;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px dashed #c9c7b8;
+}
+
+.skill-list-header .skill-name { flex: 1; margin-left: 25px; } /* Espaço para alinhar com o dado */
+.skill-list-header .skill-stat { width: 40px; text-align: center; }
+
+.skills-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Linha individual da Perícia */
+.skill-row {
+    display: flex;
+    align-items: center;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.skill-row:last-child {
+    border-bottom: none;
+}
+
+/* Botão de Rolagem (Dado) */
+.skill-roll {
+    color: #7a3b3b;
+    margin-right: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.skill-roll:hover {
+    color: #c86400;
+    text-shadow: 0 0 5px rgba(200, 100, 0, 0.3);
+    transform: scale(1.1);
+}
+
+.skill-row .skill-name {
+    flex: 1;
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Valores passivos formatados sutilmente abaixo do nome */
+.passive-val {
+    font-size: 10px;
+    color: #888;
+    font-weight: normal;
+}
+
+/* Total Calculado (Apenas Leitura) */
+.skill-row .skill-total {
+    width: 40px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    color: #7a3b3b;
+}
+
+/* Inputs de Graduação e Bônus */
+.skill-row input {
+    width: 40px;
+    height: 24px;
+    text-align: center;
+    font-size: 13px;
+    border: 1px solid #a8a698;
+    border-radius: 3px;
+    background: #fdfdfd;
+    margin-left: 2px;
+}
+
+.skill-row input:focus {
+    box-shadow: 0 0 4px rgba(200, 100, 0, 0.5);
+    outline: none;
+}
