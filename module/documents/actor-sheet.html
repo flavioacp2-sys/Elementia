@@ -84,10 +84,15 @@
                 {{/if}}
             </section>
 
-            <!-- PAINEL DE CARGA -->
+          <!-- PAINEL DE CARGA -->
             <section class="carry-weight-dashboard">
                 <h3 class="section-title">Capacidade de Carga (kg)</h3>
                 <div class="weight-grid">
+                    <!-- Nova caixa de Peso Atual -->
+                    <div class="weight-box atual" style="background: #4a4a4a; color: white; border-color: #222;">
+                        <label style="color: #ccc;">Peso Atual</label>
+                        <span style="color: white;">{{system.attributes.carga.atual}}</span>
+                    </div>
                     <div class="weight-box leve">
                         <label>Leve</label>
                         <span>{{system.attributes.carga.leve}}</span>
