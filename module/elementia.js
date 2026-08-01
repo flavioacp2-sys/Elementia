@@ -9,12 +9,15 @@ import { ElementiaItemSheet } from "./sheets/item-sheet.js";
 Hooks.once('init', async function() {
   console.log('Elementia | Inicializando Elementia RPG System');
 
+  // 1. Substitui as classes padrão do Foundry pelas nossas
   CONFIG.Actor.documentClass = ElementiaActor;
   CONFIG.Item.documentClass = ElementiaItem;
 
+  // 2. Remove as fichas (sheets) cinzas nativas do sistema
   Actors.unregisterSheet("core", ActorSheet);
   Items.unregisterSheet("core", ItemSheet);
 
+  // 3. Registra as nossas fichas estilizadas
   Actors.registerSheet("elementia", ElementiaCharacterSheet, { 
     types: ["character", "npc"], 
     makeDefault: true 
@@ -24,7 +27,8 @@ Hooks.once('init', async function() {
     makeDefault: true 
   });
 
-  // A Iniciativa agora puxa apenas o dado + o valor total calculado na ficha
+  // 4. Configura a Matemática do Rastreador de Combate (Iniciativa)
+  // O sistema puxará automaticamente o Reflexos + Percepção do Ator
   CONFIG.Combat.initiative = {
     formula: "1d20 + @combat.initiative.total",
     decimals: 2
@@ -35,20 +39,23 @@ Hooks.once('init', async function() {
 /*  Automação Tática: Início de Turno           */
 /* -------------------------------------------- */
 Hooks.on("updateCombat", async (combat, updateData, options, userId) => {
-  // Garante que só o Mestre (ou quem estiver processando o combate) atualize os dados para evitar loops
+  // Garante que apenas a máquina do Mestre processe isso, evitando loops se houver 5 jogadores
   if (!game.user.isGM) return;
 
-  // Verifica se o turno mudou
+  // Verifica se o turno ou o round realmente mudaram
   if (updateData.turn !== undefined || updateData.round !== undefined) {
     const currentCombatant = combat.combatant;
     
     if (currentCombatant && currentCombatant.actor) {
       const actor = currentCombatant.actor;
       
-      // Regra de Game Design: Recarrega 3 Ações e 1 Reação no início do turno
+      // Regra de Game Design: Recarrega Ações e Reações no início do turno
+      const maxActions = actor.system.attributes.actionPoints.max;
+      const maxReactions = actor.system.attributes.reactions.max;
+
       await actor.update({
-        "system.combat.actionPoints.value": actor.system.combat.actionPoints.max,
-        "system.combat.reactions.value": actor.system.combat.reactions.max
+        "system.attributes.actionPoints.value": maxActions,
+        "system.attributes.reactions.value": maxReactions
       });
       
       console.log(`Elementia | Turno de ${actor.name} iniciado. Ações e Reações restauradas.`);
@@ -57,8 +64,8 @@ Hooks.on("updateCombat", async (combat, updateData, options, userId) => {
 });
 
 /* -------------------------------------------- */
-/*  Hooks de Preparação                         */
+/*  Sistema Pronto                              */
 /* -------------------------------------------- */
-Hooks.on("ready", function() {
-  console.log("Elementia | Sistema Pronto. Conectado ao banco de dados com sucesso.");
+Hooks.once("ready", function() {
+  console.log("Elementia | Sistema carregado com sucesso. Bem-vindo à mesa!");
 });
