@@ -29,7 +29,6 @@ export class ElementiaCharacterSheet extends ActorSheet {
     return context;
   }
 
-  /** @override */
 /** @override */
   activateListeners(html) {
     super.activateListeners(html);
