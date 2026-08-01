@@ -25,13 +25,60 @@ export class ElementiaItem extends Item {
 
     // Calcula dinamicamente o número de slots (encaixes) para atributos da arma
     system.maxAttributes = this._calculateWeaponAttributeSlots(system.quality, system.weaponType);
+
+    // NOVA LINHA: Aplica as regras de Engenhocas e Preço
+    this._applyCustomizationRules(system);
+    
   }
 
   _prepareArmorData(system) {
     // Calcula dinamicamente o número de slots (encaixes) para armaduras, vestes e escudos
     system.maxAttributes = this._calculateArmorAttributeSlots(system.quality, system.armorType);
-  }
 
+    // NOVA LINHA: Aplica as regras de Engenhocas e Preço
+    this._applyCustomizationRules(system);
+    
+  }
+  
+/**
+   * Applica as Regras de Ouro:
+   * 1. Engenhocas consomem maxAttributes.
+   * 2. Materiais e Encantamentos alteram o preço final.
+   */
+  _applyCustomizationRules(system) {
+    // 1. REGRA DE ATRIBUTOS (ENGENHOCAS/MODIFICAÇÕES)
+    let usedSlots = 0;
+    if (system.modifications && Array.isArray(system.modifications)) {
+      for (let mod of system.modifications) {
+        // Soma o custo de slots de cada modificação instalada
+        usedSlots += (mod.slots_consumed || 0);
+      }
+    }
+    system.usedAttributes = usedSlots;
+
+    // Alerta no console se o item estiver "quebrado" (passou do limite)
+    if (system.usedAttributes > system.maxAttributes) {
+      console.warn(`Elementia | Item sobrecarregado! Modificações excedem o limite de ${system.maxAttributes} slots.`);
+    }
+
+    // 2. REGRA DE ECONOMIA (MATERIAIS E ENCANTAMENTOS)
+    let baseCost = system.economy?.basePrice || 0;
+    let materialCost = system.material?.costModifier || 0;
+    let enchantCost = 0;
+
+    if (system.enchantments && Array.isArray(system.enchantments)) {
+      for (let enc of system.enchantments) {
+        // Soma o custo de cada encantamento
+        enchantCost += (enc.cost_added || 0);
+      }
+    }
+    
+    // Calcula e crava o preço final
+    if (system.economy) {
+      system.economy.finalPrice = baseCost + materialCost + enchantCost;
+    }
+  }
+  
   /**
    * Calcula os encaixes de atributos baseados no subtipo da arma e qualidade.
    */
