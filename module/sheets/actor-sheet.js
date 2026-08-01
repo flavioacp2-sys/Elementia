@@ -17,9 +17,14 @@ export class ElementiaCharacterSheet extends ActorSheet {
     const actorData = this.actor.toObject(false);
     context.system = actorData.system;
 
-    // Filtra itens para a aba de Habilidades
+    // Filtros para a Aba de Habilidades
     context.habilidadesRaciais = context.items.filter(i => i.type === 'ability' && i.system.sourceType === 'racial');
     context.habilidadesClasse = context.items.filter(i => i.type === 'ability' && i.system.sourceType === 'class');
+
+    // Filtros para a Aba de Inventário
+    context.weapons = context.items.filter(i => i.type === 'weapon');
+    context.armors = context.items.filter(i => i.type === 'armor' || i.type === 'shield');
+    context.gears = context.items.filter(i => i.type === 'gear');
 
     return context;
   }
