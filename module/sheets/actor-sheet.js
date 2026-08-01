@@ -30,6 +30,7 @@ export class ElementiaCharacterSheet extends ActorSheet {
   }
 
   /** @override */
+/** @override */
   activateListeners(html) {
     super.activateListeners(html);
 
@@ -40,6 +41,45 @@ export class ElementiaCharacterSheet extends ActorSheet {
     // OUVINTE: ROLAGEM DE PERÍCIAS
     // =====================================
     html.find('.skill-roll').click(this._onRollSkill.bind(this));
+
+    // =====================================
+    // OUVINTES: GERENCIAMENTO DE ITENS
+    // =====================================
+    
+    // 1. Botão de Editar Item (Abre a ficha do item)
+    html.find('.item-edit').click(ev => {
+      const li = $(ev.currentTarget).parents(".item");
+      const item = this.actor.items.get(li.data("itemId"));
+      if (item) item.sheet.render(true);
+    });
+
+    // 2. Botão de Deletar Item (Exclui do inventário/habilidades com confirmação)
+    html.find('.item-delete').click(ev => {
+      const li = $(ev.currentTarget).parents(".item");
+      const item = this.actor.items.get(li.data("itemId"));
+      if (item) {
+        // Pede confirmação antes de apagar para evitar acidentes
+        Dialog.confirm({
+          title: "Deletar Item",
+          content: `<p>Tem certeza que deseja deletar <b>${item.name}</b>?</p>`,
+          yes: () => item.delete(),
+          defaultYes: false
+        });
+      }
+    });
+
+    // 3. Botão de Equipar/Desequipar (Muda o status do item)
+    html.find('.item-equip-toggle').click(async ev => {
+      ev.preventDefault();
+      const li = $(ev.currentTarget).parents(".item");
+      const item = this.actor.items.get(li.data("itemId"));
+      
+      if (item) {
+        // Inverte o valor atual (se estava true, vira false, e vice-versa)
+        const isEquipped = item.system.equipped;
+        await item.update({ "system.equipped": !isEquipped });
+      }
+    });
   }
 
   /**
