@@ -71,6 +71,14 @@
           "blacksmith": { "rank": 0, "bonus": 0, "total": 0 },
           "inventor": { "rank": 0, "bonus": 0, "total": 0 }
         }
+        "skills": {
+        "resiliencia": { "value": 0, "label": "Resiliência" },
+        "atletismo": { "value": 0, "label": "Atletismo" },
+        "treinamento": { "value": 0, "label": "Treinamento" },
+        "pontaria": { "value": 0, "label": "Pontaria" },
+        "ladinagem": { "value": 0, "label": "Ladinagem" },
+        "magia_runica": { "value": 0, "label": "Magia Rúnica" }
+      }
       },
       "carryWeight": {
         "light": 10,
