@@ -6,6 +6,10 @@
         "health": { "value": 10, "max": 10, "temp": 0 },
         "primaryResource": { "value": 0, "max": 0, "label": "Mana" },
         "secondaryResource": { "value": 0, "max": 0, "label": "Manobra" }
+      "attributes": {
+        "movement": { "value": 0, "base": 6 },
+        "vision": { "value": "Normal" },
+        "size": { "value": "Médio" }
       },
       "skills": {
         "combat": {
@@ -76,7 +80,7 @@
       }
     }
   "Item": {
-    "types": ["weapon", "armor", "shield", "gear", "spell", "skill"],
+    "types": ["weapon", "armor", "shield", "gear", "spell", "skill", "race", "origin"],
     "weapon": {
       "damage": "1d6",
       "damageType": "Cortante",
@@ -160,6 +164,20 @@
       "quantity": 1,
       "weight": 0.5,
       "price": "1 FP"
+    }
+    "race": {
+      "description": "",
+      "vision": "Normal",
+      "movement": 6,
+      "size": "Médio",
+      "traitSlots": 3,
+      "languages": ""
+    },
+    "origin": {
+      "description": "",
+      "equipment": "",
+      "inheritedSkill": "",
+      "setback": ""
     }
   }
 }
