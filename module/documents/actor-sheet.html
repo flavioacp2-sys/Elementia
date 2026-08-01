@@ -579,10 +579,109 @@
             </div>
         </div>
 
-        <!-- ABA 3: INVENTÁRIO (Em branco por enquanto) -->
+     <!-- ABA 3: INVENTÁRIO -->
         <div class="tab" data-group="primary" data-tab="inventario">
-            <h3 class="section-title">Equipamentos e Engenhocas</h3>
-            <p>O inventário será construído aqui.</p>
+            
+            <div class="inventory-container">
+                
+                <!-- ARMAS -->
+                <section class="inventory-group">
+                    <h3 class="group-header">Armamentos</h3>
+                    <div class="inventory-list-header">
+                        <span class="item-equip-header"><i class="fas fa-fist-raised"></i></span>
+                        <span class="item-name">Arma</span>
+                        <span class="item-stat" title="Dano">Dano</span>
+                        <span class="item-stat" title="Tipo de Dano">Tipo</span>
+                        <span class="item-stat" title="Peso">Peso</span>
+                        <span class="item-controls"><i class="fas fa-cog"></i></span>
+                    </div>
+                    <ul class="item-list">
+                        {{#each weapons as |item id|}}
+                        <li class="item" data-item-id="{{item._id}}">
+                            <!-- Ícone de Equipado -->
+                            <a class="item-equip-toggle {{#if item.system.equipped}}is-equipped{{/if}}" title="Equipar">
+                                <i class="{{#if item.system.equipped}}fas{{else}}far{{/if}} fa-check-circle"></i>
+                            </a>
+                            
+                            <div class="item-name">
+                                <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+                                <h4>{{item.name}}</h4>
+                            </div>
+                            <span class="item-stat">{{item.system.damage}}</span>
+                            <span class="item-stat">{{item.system.damageType}}</span>
+                            <span class="item-stat">{{item.system.weight}} kg</span>
+                            <div class="item-controls">
+                                <a class="item-control item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-delete" title="Deletar"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </section>
+
+                <!-- ARMADURAS E ESCUDOS -->
+                <section class="inventory-group">
+                    <h3 class="group-header">Vestimentas e Defesa</h3>
+                    <div class="inventory-list-header">
+                        <span class="item-equip-header"><i class="fas fa-shield-alt"></i></span>
+                        <span class="item-name">Equipamento</span>
+                        <span class="item-stat" title="Resistência Física">R. Fís.</span>
+                        <span class="item-stat" title="Resistência Mágica">R. Mag.</span>
+                        <span class="item-stat" title="Peso">Peso</span>
+                        <span class="item-controls"><i class="fas fa-cog"></i></span>
+                    </div>
+                    <ul class="item-list">
+                        {{#each armors as |item id|}}
+                        <li class="item" data-item-id="{{item._id}}">
+                            <a class="item-equip-toggle {{#if item.system.equipped}}is-equipped{{/if}}" title="Equipar">
+                                <i class="{{#if item.system.equipped}}fas{{else}}far{{/if}} fa-check-circle"></i>
+                            </a>
+                            
+                            <div class="item-name">
+                                <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+                                <h4>{{item.name}}</h4>
+                            </div>
+                            <!-- Se for escudo, mostra bônus de bloqueio, senão mostra resis. física da armadura -->
+                            <span class="item-stat">{{#if item.system.blockBonus}}+{{item.system.blockBonus}}{{else}}{{item.system.physicalResist}}{{/if}}</span>
+                            <span class="item-stat">{{item.system.magicalResist}}</span>
+                            <span class="item-stat">{{item.system.weight}} kg</span>
+                            <div class="item-controls">
+                                <a class="item-control item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-delete" title="Deletar"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </section>
+
+                <!-- EQUIPAMENTOS GERAIS (Engenhocas, Poções, Ferramentas) -->
+                <section class="inventory-group">
+                    <h3 class="group-header">Mochila</h3>
+                    <div class="inventory-list-header">
+                        <span class="item-name" style="padding-left: 5px;">Item</span>
+                        <span class="item-stat" title="Quantidade">Qtd.</span>
+                        <span class="item-stat" title="Peso">Peso</span>
+                        <span class="item-controls"><i class="fas fa-cog"></i></span>
+                    </div>
+                    <ul class="item-list">
+                        {{#each gears as |item id|}}
+                        <li class="item" data-item-id="{{item._id}}">
+                            <div class="item-name" style="padding-left: 5px;">
+                                <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+                                <h4>{{item.name}}</h4>
+                            </div>
+                            <span class="item-stat">{{item.system.quantity}}</span>
+                            <span class="item-stat">{{item.system.weight}} kg</span>
+                            <div class="item-controls">
+                                <a class="item-control item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-delete" title="Deletar"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </section>
+
+            </div>
         </div>
 
     </section>
