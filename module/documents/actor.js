@@ -121,7 +121,8 @@ export class ElementiaActor extends Actor {
             system.attributes.resources.secundario.label = classData.resource2.name;
             system.attributes.resources.secundario.max = halfLevel; 
         }
-
+    }
+    
       // ========================================================================
     // 7. PROCESSAMENTO DE INVENTÁRIO (Peso Total e Defesas de Equipamentos)
     // ========================================================================
