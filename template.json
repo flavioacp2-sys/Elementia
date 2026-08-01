@@ -82,7 +82,18 @@
       "damageType": "Cortante",
       "range": "Corpo a Corpo",
       "weight": 1.0,
-      "price": "10 KO",
+      "economy": {
+          "basePrice": 10,
+          "currency": "KO",
+          "finalPrice": 10
+        },
+        "material": {
+          "name": "Padrão",
+          "costModifier": 0
+        },
+        "modifications": [],
+        "enchantments": [],
+        "usedAttributes": 0,
       "rarity": "Tier 1",
       "quality": "Comum",
       "attributes": "",
@@ -103,7 +114,18 @@
       "dodgePenalty": 0,
       "stealthPenalty": 0,
       "weight": 10.0,
-      "price": "50 KO",
+      "economy": {
+          "basePrice": 10,
+          "currency": "KO",
+          "finalPrice": 10
+        },
+        "material": {
+          "name": "Padrão",
+          "costModifier": 0
+        },
+        "modifications": [],
+        "enchantments": [],
+        "usedAttributes": 0,
       "rarity": "Tier 2",
       "quality": "Comum",
       "attributes": "",
@@ -116,7 +138,18 @@
       "damage": "1d6",
       "damageType": "Contusivo",
       "weight": 3.0,
-      "price": "30 KO",
+      "economy": {
+          "basePrice": 10,
+          "currency": "KO",
+          "finalPrice": 10
+        },
+        "material": {
+          "name": "Padrão",
+          "costModifier": 0
+        },
+        "modifications": [],
+        "enchantments": [],
+        "usedAttributes": 0,
       "rarity": "Tier 1",
       "quality": "Comum",
       "attributes": "",
