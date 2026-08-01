@@ -2,24 +2,24 @@
   "Actor": {
     "types": ["character", "npc"],
     "character": {
-      "resources": {
+      "attributes": {
+        "level": { "value": 1 },
         "health": { "value": 10, "max": 10, "temp": 0 },
-    "attributes": {
-      "level": { "value": 1 },
-      "resources": {
+        "resources": {
           "primario": { "label": "", "value": 0, "max": 0 },
           "secundario": { "label": "", "value": 0, "max": 0 }
-        }
+        },
         "movement": { "value": 0, "base": 6 },
         "vision": { "value": "Normal" },
         "size": { "value": "Médio" },
         "actionPoints": { "value": 3, "max": 3 }, 
-        "reaction": { "value": 1, "max": 1 },
+        "reactions": { "value": 1, "max": 1 },
         "carga": {
-          "value": 0,
           "leve": 10,
           "media": 15,
-          "pesada": 20
+          "pesada": 20,
+          "erguer": 25,
+          "arrastar": 35
         }
       },
       "skills": {
@@ -33,8 +33,10 @@
           "reflexes": { "rank": 0, "bonus": 0, "total": 0 },
           "resilience": { "rank": 0, "bonus": 0, "total": 0 },
           "willpower": { "rank": 0, "bonus": 0, "total": 0 },
-          "class1": { "label": "", "rank": 0, "bonus": 0, "total": 0 },
-          "class2": { "label": "", "rank": 0, "bonus": 0, "total": 0 }
+          "training": { "rank": 0, "bonus": 0, "total": 0 },
+          "marksmanship": { "rank": 0, "bonus": 0, "total": 0 },
+          "thievery": { "rank": 0, "bonus": 0, "total": 0 },
+          "runeMagic": { "rank": 0, "bonus": 0, "total": 0 }
         },
         "general": {
           "acrobatics": { "rank": 0, "bonus": 0, "total": 0 },
@@ -71,21 +73,6 @@
           "blacksmith": { "rank": 0, "bonus": 0, "total": 0 },
           "inventor": { "rank": 0, "bonus": 0, "total": 0 }
         }
-        "skills": {
-        "resiliencia": { "value": 0, "label": "Resiliência" },
-        "atletismo": { "value": 0, "label": "Atletismo" },
-        "treinamento": { "value": 0, "label": "Treinamento" },
-        "pontaria": { "value": 0, "label": "Pontaria" },
-        "ladinagem": { "value": 0, "label": "Ladinagem" },
-        "magia_runica": { "value": 0, "label": "Magia Rúnica" }
-      }
-      },
-      "carryWeight": {
-        "light": 10,
-        "medium": 15,
-        "heavy": 20,
-        "lift": 25,
-        "drag": 35
       },
       "defenses": {
         "block": { "total": 0, "bonus": 0 },
@@ -93,11 +80,10 @@
         "counter": { "total": 0, "bonus": 0 }
       },
       "combat": {
-        "actionPoints": { "value": 3, "max": 3 },
-        "reactions": { "value": 1, "max": 1 },
         "initiative": { "total": 0 }
       }
     }
+  },
   "Item": {
     "types": ["weapon", "armor", "shield", "gear", "spell", "skill", "race", "origin", "class", "ability"],
     "weapon": {
@@ -106,17 +92,17 @@
       "range": "Corpo a Corpo",
       "weight": 1.0,
       "economy": {
-          "basePrice": 10,
-          "currency": "KO",
-          "finalPrice": 10
-        },
-        "material": {
-          "name": "Padrão",
-          "costModifier": 0
-        },
-        "modifications": [],
-        "enchantments": [],
-        "usedAttributes": 0,
+        "basePrice": 10,
+        "currency": "KO",
+        "finalPrice": 10
+      },
+      "material": {
+        "name": "Padrão",
+        "costModifier": 0
+      },
+      "modifications": [],
+      "enchantments": [],
+      "usedAttributes": 0,
       "rarity": "Tier 1",
       "quality": "Comum",
       "attributes": "",
@@ -138,17 +124,17 @@
       "stealthPenalty": 0,
       "weight": 10.0,
       "economy": {
-          "basePrice": 10,
-          "currency": "KO",
-          "finalPrice": 10
-        },
-        "material": {
-          "name": "Padrão",
-          "costModifier": 0
-        },
-        "modifications": [],
-        "enchantments": [],
-        "usedAttributes": 0,
+        "basePrice": 10,
+        "currency": "KO",
+        "finalPrice": 10
+      },
+      "material": {
+        "name": "Padrão",
+        "costModifier": 0
+      },
+      "modifications": [],
+      "enchantments": [],
+      "usedAttributes": 0,
       "rarity": "Tier 2",
       "quality": "Comum",
       "attributes": "",
@@ -162,17 +148,17 @@
       "damageType": "Contusivo",
       "weight": 3.0,
       "economy": {
-          "basePrice": 10,
-          "currency": "KO",
-          "finalPrice": 10
-        },
-        "material": {
-          "name": "Padrão",
-          "costModifier": 0
-        },
-        "modifications": [],
-        "enchantments": [],
-        "usedAttributes": 0,
+        "basePrice": 10,
+        "currency": "KO",
+        "finalPrice": 10
+      },
+      "material": {
+        "name": "Padrão",
+        "costModifier": 0
+      },
+      "modifications": [],
+      "enchantments": [],
+      "usedAttributes": 0,
       "rarity": "Tier 1",
       "quality": "Comum",
       "attributes": "",
@@ -183,7 +169,7 @@
       "quantity": 1,
       "weight": 0.5,
       "price": "1 FP"
-    }
+    },
     "race": {
       "description": "",
       "vision": "Normal",
@@ -217,7 +203,8 @@
     "ability": {
       "description": "",
       "actionCost": "1 Ação",
-      "sourceType": "racial" // Pode ser "racial", "class" ou "origin"
+      "resourceCost": "",
+      "sourceType": "racial"
     }
   }
 }
