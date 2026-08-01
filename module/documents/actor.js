@@ -65,6 +65,30 @@ export class ElementiaActor extends Actor {
       // Exemplo: O Draconiano Asas Poderosas e o Feralis Errantis possuem regras mistas de voo/solo
       if (raceData.movementAlt) {
          system.attributes.movement.alt = raceData.movementAlt; // Para guardar "Voo 6" ou "Nadar 6"
+
+       // ========================================================================
+      // 6. CÁLCULO DE CARGA (REGRA BASE)
+      // ========================================================================
+    
+      // Puxa os valores das perícias, assumindo 0 se não existirem
+      let resiliencia = system.skills?.resiliencia?.value || 0;
+      let atletismo = system.skills?.atletismo?.value || 0;
+  
+      // Calcula a carga leve base (Resiliência + Atletismo x 5)
+      let cargaLeve = resiliencia + (atletismo * 5);
+      
+      // Aplica a regra de limite mínimo de 10 KG
+      if (cargaLeve < 10) {
+        cargaLeve = 10;
+      }
+
+      // Define as categorias de carga na ficha
+      system.attributes.carga.leve = cargaLeve;
+      system.attributes.carga.media = Math.floor(cargaLeve * 1.5);
+      system.attributes.carga.pesada = cargaLeve * 2;
+      system.attributes.carga.erguer = Math.floor(cargaLeve * 2.5);
+    
+    // (Opcional no futuro: somar o peso dos itens do inventário no "value" da carga) 
       }
     }
   }
