@@ -121,6 +121,48 @@ export class ElementiaActor extends Actor {
             system.attributes.resources.secundario.label = classData.resource2.name;
             system.attributes.resources.secundario.max = halfLevel; 
         }
+
+      // ========================================================================
+    // 7. PROCESSAMENTO DE INVENTÁRIO (Peso Total e Defesas de Equipamentos)
+    // ========================================================================
+    
+    let pesoAtual = 0;
+    let bonusBloqueioEquipamento = 0;
+    let penalidadeEsquivaEquipamento = 0;
+
+    // Faz um loop por todos os itens que o personagem possui
+    for (let item of this.items) {
+        const itemData = item.system;
+        
+        // 1. Soma do Peso (Garante que ferramentas com múltiplas unidades sejam somadas corretamente)
+        const peso = itemData.weight || 0;
+        const quantidade = itemData.quantity || 1;
+        pesoAtual += (peso * quantidade);
+
+        // 2. Extração de Status de Combate (Apenas se o item estiver EQUIPADO)
+        if (itemData.equipped) {
+            if (item.type === 'armor') {
+                bonusBloqueioEquipamento += (itemData.physicalResist || 0);
+                penalidadeEsquivaEquipamento += (itemData.dodgePenalty || 0);
+            }
+            else if (item.type === 'shield') {
+                bonusBloqueioEquipamento += (itemData.blockBonus || 0);
+                penalidadeEsquivaEquipamento += (itemData.dodgePenalty || 0);
+            }
+        }
+    }
+
+    // Salva o peso total arredondado para evitar números infinitos (ex: 1.33333)
+    system.attributes.carga.atual = parseFloat(pesoAtual.toFixed(2));
+
+    // 3. Aplica a Regra de Game Design para as Defesas
+    // Bloqueio = Resiliência Total + Bônus do Equipamento
+    system.defenses.block.bonus = bonusBloqueioEquipamento;
+    system.defenses.block.total = system.skills.combat.resilience.total + bonusBloqueioEquipamento;
+
+    // Esquiva = Reflexos Total - Penalidade do Equipamento
+    system.defenses.dodge.bonus = penalidadeEsquivaEquipamento; 
+    system.defenses.dodge.total = system.skills.combat.reflexes.total - Math.abs(penalidadeEsquivaEquipamento);
     }
   }
 }
