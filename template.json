@@ -191,8 +191,19 @@
     },
     "class": {
       "description": "",
-      "hpPerLevel": 6,
-      "primaryResource": "Mana"
+      "hpBase": 0,
+      "hpPerLevel": "1d8",
+      "skillBase": "resiliencia",
+      "resource1": {
+        "name": "",
+        "baseScale": 0.5,
+        "skillBonus": ""
+      },
+      "resource2": {
+        "name": "",
+        "baseScale": 0.5,
+        "skillBonus": ""
+      }
     },
     "ability": {
       "description": "",
