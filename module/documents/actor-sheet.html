@@ -24,6 +24,22 @@
             <!-- PAINEL DE STATUS VITAIS E RECURSOS -->
             <section class="tactical-dashboard">
                 
+                <!-- PAINEL DE DEFESAS ATIVAS -->
+            <section class="tactical-dashboard" style="margin-top: 10px; background: rgba(122, 59, 59, 0.05); border-color: #a87979;">
+                <div class="dashboard-group">
+                    <div class="stat-box" style="border-color: #7a3b3b;">
+                        <label style="color: #7a3b3b;">🛡️ Bloqueio</label>
+                        <span class="max-value" style="font-size: 20px;">{{system.defenses.block.total}}</span>
+                        <span style="font-size: 10px; color: #888;">(Base + Equip)</span>
+                    </div>
+                    <div class="stat-box" style="border-color: #3b577a;">
+                        <label style="color: #3b577a;">💨 Esquiva</label>
+                        <span class="max-value" style="font-size: 20px;">{{system.defenses.dodge.total}}</span>
+                        <span style="font-size: 10px; color: #888;">(Base - Penalidade)</span>
+                    </div>
+                </div>
+            </section>
+                
                 <!-- Bloco 1: Vida e Nível -->
                 <div class="dashboard-group">
                     <div class="stat-box vital">
