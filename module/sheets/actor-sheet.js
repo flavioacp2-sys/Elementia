@@ -79,6 +79,10 @@ export class ElementiaCharacterSheet extends ActorSheet {
         await item.update({ "system.equipped": !isEquipped });
       }
     });
+    
+    // Rolar Ataque com Arma
+    html.find('.item-roll').click(this._onItemRoll.bind(this));
+    
   }
 
   /**
@@ -115,6 +119,75 @@ export class ElementiaCharacterSheet extends ActorSheet {
     roll.toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
         flavor: `Teste de Perícia: <b>${skillName}</b>`
+    });
+  }
+
+  /**
+   * Executa a rolagem de Ataque e Dano ao clicar no ícone da Arma
+   */
+  async _onItemRoll(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const li = $(element).parents(".item");
+    const item = this.actor.items.get(li.data("itemId"));
+
+    // Garante que só armas possam rolar ataques por aqui
+    if (item.type !== "weapon") return;
+
+    const itemData = item.system;
+    const skills = this.actor.system.skills.combat;
+
+    // 1. Define qual perícia usar baseado no Alcance (Range)
+    let attackMod = 0;
+    let skillName = "";
+
+    // Se for Corpo a Corpo ou Arremesso (Usa Habilidade com Armas)
+    if (itemData.range.toLowerCase().includes("corpo a corpo") || itemData.properties.thrown) {
+        attackMod = skills.weaponSkill.total;
+        skillName = "Habilidade com Armas";
+    } 
+    // Se for à Distância (Usa Precisão)
+    else {
+        attackMod = skills.precision.total;
+        skillName = "Precisão";
+    }
+
+    // 2. Rolagem de Acerto (1d20 + Perícia)
+    let attackRoll = new Roll(`1d20 + ${attackMod}`);
+    await attackRoll.evaluate({async: true});
+
+    // 3. Rolagem de Dano (Dado da Arma)
+    let damageFormula = itemData.damage || "1d6";
+    let damageRoll = new Roll(damageFormula);
+    await damageRoll.evaluate({async: true});
+
+    // 4. Constrói o HTML bonito para o Chat Message do Foundry
+    const chatHTML = `
+        <div class="elementia-chat-card">
+            <h3 style="border-bottom: 2px solid #7a3b3b; margin-bottom: 5px; padding-bottom: 3px;">
+                <img src="${item.img}" width="20" height="20" style="vertical-align: middle; margin-right: 5px; border: none;"/>
+                Ataca com ${item.name}
+            </h3>
+            <div style="font-size: 12px; margin-bottom: 8px; color: #555;">
+                <strong>Perícia:</strong> ${skillName} (+${attackMod}) <br>
+                <strong>Propriedades:</strong> ${itemData.range} | ${itemData.damageType}
+            </div>
+            
+            <div style="background: rgba(0,0,0,0.05); padding: 5px; border: 1px solid #c9c7b8; border-radius: 3px; margin-bottom: 5px;">
+                <div style="font-weight: bold; color: #3b577a; font-size: 14px;">Acerto: [[${attackRoll.result}]]</div>
+            </div>
+            
+            <div style="background: rgba(122,59,59,0.1); padding: 5px; border: 1px solid #a87979; border-radius: 3px;">
+                <div style="font-weight: bold; color: #7a3b3b; font-size: 14px;">Dano: [[${damageRoll.result}]] <span style="font-size: 11px; font-weight: normal;">(${itemData.damageType})</span></div>
+            </div>
+        </div>
+    `;
+
+    // 5. Envia a mensagem para o chat do jogo
+    ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        content: chatHTML,
+        type: CONST.CHAT_MESSAGE_TYPES.OTHER
     });
   }
 }
