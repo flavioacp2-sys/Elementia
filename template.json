@@ -37,6 +37,14 @@
           "marksmanship": { "rank": 0, "bonus": 0, "total": 0 },
           "thievery": { "rank": 0, "bonus": 0, "total": 0 },
           "runeMagic": { "rank": 0, "bonus": 0, "total": 0 }
+          "arcanism": { "rank": 0, "bonus": 0, "total": 0 },
+          "arcaneRitual": { "rank": 0, "bonus": 0, "total": 0 },
+          "rage": { "rank": 0, "bonus": 0, "total": 0 },
+          "magicalMusic": { "rank": 0, "bonus": 0, "total": 0 },
+          "faith": { "rank": 0, "bonus": 0, "total": 0 },
+          "divineRitual": { "rank": 0, "bonus": 0, "total": 0 },
+          "herbalism": { "rank": 0, "bonus": 0, "total": 0 },
+          "druidicRitual": { "rank": 0, "bonus": 0, "total": 0 }
         },
         "general": {
           "acrobatics": { "rank": 0, "bonus": 0, "total": 0 },
