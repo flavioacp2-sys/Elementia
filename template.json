@@ -18,18 +18,8 @@
           "reflexes": { "rank": 0, "bonus": 0, "total": 0 },
           "resilience": { "rank": 0, "bonus": 0, "total": 0 },
           "willpower": { "rank": 0, "bonus": 0, "total": 0 },
-          "arcanism": { "rank": 0, "bonus": 0, "total": 0 },
-          "arcaneRitual": { "rank": 0, "bonus": 0, "total": 0 },
-          "marksmanship": { "rank": 0, "bonus": 0, "total": 0 },
-          "rage": { "rank": 0, "bonus": 0, "total": 0 },
-          "magicMusic": { "rank": 0, "bonus": 0, "total": 0 },
-          "runeMagic": { "rank": 0, "bonus": 0, "total": 0 },
-          "faith": { "rank": 0, "bonus": 0, "total": 0 },
-          "divineRitual": { "rank": 0, "bonus": 0, "total": 0 },
-          "herbalism": { "rank": 0, "bonus": 0, "total": 0 },
-          "druidicRitual": { "rank": 0, "bonus": 0, "total": 0 },
-          "training": { "rank": 0, "bonus": 0, "total": 0 },
-          "thievery": { "rank": 0, "bonus": 0, "total": 0 }
+          "class1": { "label": "", "rank": 0, "bonus": 0, "total": 0 },
+          "class2": { "label": "", "rank": 0, "bonus": 0, "total": 0 }
         },
         "general": {
           "acrobatics": { "rank": 0, "bonus": 0, "total": 0 },
