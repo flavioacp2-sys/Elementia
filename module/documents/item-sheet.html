@@ -112,12 +112,52 @@
                     <input type="text" name="system.resourceCost" value="{{system.resourceCost}}"/>
                 </div>
                 <div class="stat-group">
-                    <label>Fonte (racial/class)</label>
-                    <input type="text" name="system.sourceType" value="{{system.sourceType}}"/>
+                    <label>Fonte</label>
+                    <select name="system.sourceType" style="height: 28px;">
+                        {{selectOptions (hash class="Classe" racial="Racial" origin="Origem" item="Item/Equipamento") selected=system.sourceType}}
+                    </select>
                 </div>
                 {{/if}}
 
-            </div>
+                <!-- ========================================== -->
+                <!-- SE FOR MAGIA OU RITUAL                     -->
+                <!-- ========================================== -->
+                {{#if isSpell}}
+                <div class="stat-group">
+                    <label>Tipo (Magia / Ritual)</label>
+                    <select name="system.spellType" style="height: 28px;">
+                        {{selectOptions (hash magia="Magia" ritual="Ritual") selected=system.spellType}}
+                    </select>
+                </div>
+                <div class="stat-group">
+                    <label>Nível / Tier</label>
+                    <input type="text" name="system.tier" value="{{system.tier}}" data-dtype="Number"/>
+                </div>
+                <div class="stat-group">
+                    <label>Tempo de Execução</label>
+                    <input type="text" name="system.actionCost" value="{{system.actionCost}}" placeholder="Ex: 2 Ações, 1 Minuto"/>
+                </div>
+                <div class="stat-group">
+                    <label>Custo de Recurso</label>
+                    <input type="text" name="system.resourceCost" value="{{system.resourceCost}}" placeholder="Ex: 2 Mana"/>
+                </div>
+                <div class="stat-group">
+                    <label>Alcance</label>
+                    <input type="text" name="system.range" value="{{system.range}}" placeholder="Ex: Pessoal, 15m"/>
+                </div>
+                <div class="stat-group">
+                    <label>Alvo / Área</label>
+                    <input type="text" name="system.target" value="{{system.target}}" placeholder="Ex: 1 Criatura"/>
+                </div>
+                <div class="stat-group">
+                    <label>Duração</label>
+                    <input type="text" name="system.duration" value="{{system.duration}}" placeholder="Ex: Instantâneo, 1 Hora"/>
+                </div>
+                <div class="stat-group">
+                    <label>Resistência / Defesa</label>
+                    <input type="text" name="system.defense" value="{{system.defense}}" placeholder="Ex: Vontade, Esquiva"/>
+                </div>
+                {{/if}}
 
                 <!-- ========================================== -->
                 <!-- SE FOR CLASSE                              -->
@@ -200,6 +240,8 @@
                     <input type="text" name="system.equipment" value="{{system.equipment}}" placeholder="Ex: 1x Adaga, 50 KO..."/>
                 </div>
                 {{/if}}
+
+            </div> <!-- FECHAMENTO DO GRID AQUI (Agora engloba tudo!) -->
             
             <!-- ECONOMIA E QUALIDADE (Aparece para armas, armaduras e escudos) -->
             {{#if (or isWeapon (or isArmor isShield))}}
