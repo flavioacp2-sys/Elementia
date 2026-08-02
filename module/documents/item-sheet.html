@@ -119,6 +119,88 @@
 
             </div>
 
+                <!-- ========================================== -->
+                <!-- SE FOR CLASSE                              -->
+                <!-- ========================================== -->
+                {{#if isClass}}
+                <div class="stat-group">
+                    <label>PV Base (Nível 1)</label>
+                    <input type="text" name="system.hpBase" value="{{system.hpBase}}" data-dtype="Number"/>
+                </div>
+                <div class="stat-group">
+                    <label>PV por Nível (Dado)</label>
+                    <input type="text" name="system.hpPerLevel" value="{{system.hpPerLevel}}" placeholder="Ex: 1d8"/>
+                </div>
+                
+                <div style="grid-column: span 2; margin-top: 10px;">
+                    <h3 class="group-header" style="font-size: 12px; border-bottom: 1px solid #c9c7b8; color: #7a3b3b;">Recurso Primário (Ex: Mana, Manobra)</h3>
+                </div>
+                <div class="stat-group">
+                    <label>Nome do Recurso 1</label>
+                    <input type="text" name="system.resource1.name" value="{{system.resource1.name}}" placeholder="Ex: Mana"/>
+                </div>
+                <div class="stat-group">
+                    <label>Perícia Base (ID)</label>
+                    <input type="text" name="system.resource1.skillBonus" value="{{system.resource1.skillBonus}}" placeholder="Ex: arcanism, training"/>
+                </div>
+
+                <div style="grid-column: span 2; margin-top: 5px;">
+                    <h3 class="group-header" style="font-size: 12px; border-bottom: 1px solid #c9c7b8; color: #7a3b3b;">Recurso Secundário (Opcional)</h3>
+                </div>
+                <div class="stat-group">
+                    <label>Nome do Recurso 2</label>
+                    <input type="text" name="system.resource2.name" value="{{system.resource2.name}}" placeholder="Ex: Estamina"/>
+                </div>
+                <div class="stat-group">
+                    <label>Perícia Base (ID)</label>
+                    <input type="text" name="system.resource2.skillBonus" value="{{system.resource2.skillBonus}}"/>
+                </div>
+                {{/if}}
+
+                <!-- ========================================== -->
+                <!-- SE FOR RAÇA                                -->
+                <!-- ========================================== -->
+                {{#if isRace}}
+                <div class="stat-group">
+                    <label>Deslocamento (m/quadrados)</label>
+                    <input type="text" name="system.movement" value="{{system.movement}}" data-dtype="Number"/>
+                </div>
+                <div class="stat-group">
+                    <label>Tamanho</label>
+                    <input type="text" name="system.size" value="{{system.size}}" placeholder="Ex: Médio"/>
+                </div>
+                <div class="stat-group">
+                    <label>Tipo de Visão</label>
+                    <input type="text" name="system.vision" value="{{system.vision}}" placeholder="Ex: Normal, Penumbra"/>
+                </div>
+                <div class="stat-group">
+                    <label>Slots de Traço (Qtd)</label>
+                    <input type="text" name="system.traitSlots" value="{{system.traitSlots}}" data-dtype="Number"/>
+                </div>
+                <div class="stat-group" style="grid-column: span 2;">
+                    <label>Idiomas</label>
+                    <input type="text" name="system.languages" value="{{system.languages}}" placeholder="Ex: Comum, Élfico..."/>
+                </div>
+                {{/if}}
+
+                <!-- ========================================== -->
+                <!-- SE FOR ORIGEM                              -->
+                <!-- ========================================== -->
+                {{#if isOrigin}}
+                <div class="stat-group">
+                    <label>Perícia Herdada</label>
+                    <input type="text" name="system.inheritedSkill" value="{{system.inheritedSkill}}" placeholder="Ex: Atletismo"/>
+                </div>
+                <div class="stat-group">
+                    <label>Contratempo (Setback)</label>
+                    <input type="text" name="system.setback" value="{{system.setback}}" placeholder="Ex: Dívida com Guilda"/>
+                </div>
+                <div class="stat-group" style="grid-column: span 2;">
+                    <label>Equipamento Inicial</label>
+                    <input type="text" name="system.equipment" value="{{system.equipment}}" placeholder="Ex: 1x Adaga, 50 KO..."/>
+                </div>
+                {{/if}}
+            
             <!-- ECONOMIA E QUALIDADE (Aparece para armas, armaduras e escudos) -->
             {{#if (or isWeapon (or isArmor isShield))}}
             <hr style="margin: 15px 0; border: none; border-top: 1px solid #c9c7b8;">
