@@ -131,6 +131,8 @@ export class ElementiaActor extends Actor {
     let bonusBloqueioEquipamento = 0;
     let penalidadeEsquivaEquipamento = 0;
     let bonusContraAtaqueEquipamento = 0;
+    let bonusResistenciaFisica = 0;
+    let bonusResistenciaMagica = 0;
 
     for (let item of this.items) {
         const itemData = item.system;
@@ -141,30 +143,33 @@ export class ElementiaActor extends Actor {
 
         if (itemData.equipped) {
             if (item.type === 'armor') {
-                bonusBloqueioEquipamento += (itemData.physicalResist || 0);
+                bonusResistenciaFisica += (itemData.physicalResist || 0);
+                bonusResistenciaMagica += (itemData.magicalResist || 0);
                 penalidadeEsquivaEquipamento += (itemData.dodgePenalty || 0);
             }
             else if (item.type === 'shield') {
                 bonusBloqueioEquipamento += (itemData.blockBonus || 0);
-                penalidadeEsquivaEquipamento += (itemData.dodgePenalty || 0);
                 bonusContraAtaqueEquipamento += (itemData.counterBonus || 0);
+                penalidadeEsquivaEquipamento += (itemData.dodgePenalty || 0);
             }
         }
     }
 
     system.attributes.carga.atual = parseFloat(pesoAtual.toFixed(2));
 
-    // Bloqueio
+    // Defesas Ativas
     system.defenses.block.bonus = bonusBloqueioEquipamento;
     system.defenses.block.total = system.skills.combat.resilience.total + bonusBloqueioEquipamento;
 
-    // Esquiva
     system.defenses.dodge.bonus = penalidadeEsquivaEquipamento; 
     system.defenses.dodge.total = system.skills.combat.reflexes.total - Math.abs(penalidadeEsquivaEquipamento);
 
-    // Contra-Ataque (Habilidade com Armas + Bônus de Equipamento/Escudo)
     let weaponSkill = system.skills.combat.weaponSkill.total;
     system.defenses.counter.bonus = bonusContraAtaqueEquipamento;
     system.defenses.counter.total = weaponSkill + bonusContraAtaqueEquipamento;
+
+    // Resistências Passivas
+    system.defenses.physical.total = (system.defenses.physical.base || 0) + bonusResistenciaFisica;
+    system.defenses.magical.total = (system.defenses.magical.base || 0) + bonusResistenciaMagica;
   }
 }
