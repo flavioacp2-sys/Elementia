@@ -85,10 +85,13 @@
           "inventor": { "rank": 0, "bonus": 0, "total": 0 }
         }
       },
-      "defenses": {
+"defenses": {
         "block": { "total": 0, "bonus": 0 },
         "dodge": { "total": 0, "bonus": 0 },
-        "counter": { "total": 0, "bonus": 0 }
+        "counter": { "total": 0, "bonus": 0 },
+        "physical": { "total": 0, "base": 0 },
+        "magical": { "total": 0, "base": 0 },
+        "specific": ""
       },
       "combat": {
         "initiative": { "total": 0 }
