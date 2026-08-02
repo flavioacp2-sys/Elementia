@@ -11,20 +11,46 @@ export class ElementiaCharacterSheet extends ActorSheet {
     });
   }
 
-  /** @override */
+ /** @override */
   getData() {
     const context = super.getData();
     const actorData = this.actor.toObject(false);
     context.system = actorData.system;
 
-    // Filtros para a Aba de Habilidades
+    // Filtros para a Abas
     context.habilidadesRaciais = context.items.filter(i => i.type === 'ability' && i.system.sourceType === 'racial');
     context.habilidadesClasse = context.items.filter(i => i.type === 'ability' && i.system.sourceType === 'class');
-
-    // Filtros para a Aba de Inventário
     context.weapons = context.items.filter(i => i.type === 'weapon');
     context.armors = context.items.filter(i => i.type === 'armor' || i.type === 'shield');
     context.gears = context.items.filter(i => i.type === 'gear');
+
+    // =====================================
+    // VISIBILIDADE DE PERÍCIAS DE CLASSE
+    // =====================================
+    const visibleSkills = {};
+    
+    // 1. Pega a classe (se houver) e normaliza o nome (tira acentos e maiúsculas para evitar bugs, ex: Clérigo vira clerigo)
+    const characterClass = context.items.find(i => i.type === 'class');
+    const className = characterClass ? characterClass.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") : "";
+    const combat = context.system.skills.combat;
+
+    // 2. Lógica: Aparece se Rank > 0 OU se o nome da Classe equipada bater com a palavra-chave
+    visibleSkills.arcanism = (combat.arcanism.rank > 0) || className.includes("mago") || className.includes("feiticeiro");
+    visibleSkills.arcaneRitual = (combat.arcaneRitual.rank > 0) || className.includes("mago") || className.includes("bruxo");
+    visibleSkills.chakra = (combat.chakra.rank > 0) || className.includes("monge") || className.includes("ninja");
+    visibleSkills.divineBlessing = (combat.divineBlessing.rank > 0) || className.includes("clerigo") || className.includes("paladino");
+    visibleSkills.divineRitual = (combat.divineRitual.rank > 0) || className.includes("clerigo") || className.includes("sacerdote");
+    visibleSkills.druidicRitual = (combat.druidicRitual.rank > 0) || className.includes("druida") || className.includes("xama");
+    visibleSkills.faith = (combat.faith.rank > 0) || className.includes("clerigo") || className.includes("paladino") || className.includes("sacerdote");
+    visibleSkills.herbalism = (combat.herbalism.rank > 0) || className.includes("druida") || className.includes("patrulheiro");
+    visibleSkills.magicalMusic = (combat.magicalMusic.rank > 0) || className.includes("bardo");
+    visibleSkills.marksmanship = (combat.marksmanship.rank > 0) || className.includes("patrulheiro") || className.includes("cacador") || className.includes("atirador");
+    visibleSkills.rage = (combat.rage.rank > 0) || className.includes("barbaro");
+    visibleSkills.runeMagic = (combat.runeMagic.rank > 0) || className.includes("mago") || className.includes("runico");
+    visibleSkills.thievery = (combat.thievery.rank > 0) || className.includes("ladino");
+    visibleSkills.training = (combat.training.rank > 0) || className.includes("guerreiro") || className.includes("lutador") || className.includes("cavaleiro");
+
+    context.visibleSkills = visibleSkills;
 
     return context;
   }
