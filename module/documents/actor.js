@@ -166,4 +166,3 @@ export class ElementiaActor extends Actor {
     system.defenses.dodge.total = system.skills.combat.reflexes.total - Math.abs(penalidadeEsquivaEquipamento);
     }
   }
-}
