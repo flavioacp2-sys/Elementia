@@ -5,6 +5,7 @@
       "attributes": {
         "level": { "value": 1 },
         "health": { "value": 10, "max": 10, "temp": 0 },
+        "money": { "FB": 0, "FP": 0, "KO": 0, "BP": 0, "DR": 0, "EE": 0 },
         "resources": {
           "primario": { "label": "", "value": 0, "max": 0 },
           "secundario": { "label": "", "value": 0, "max": 0 }
