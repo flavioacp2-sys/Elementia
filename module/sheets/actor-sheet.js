@@ -134,6 +134,29 @@ export class ElementiaCharacterSheet extends ActorSheet {
     const li = $(element).parents(".item");
     const item = this.actor.items.get(li.data("itemId"));
 
+  /**
+   * Executa a rolagem ao clicar no painel de Defesas
+   */
+  async _onRollDefense(event) {
+    event.preventDefault();
+    const defenseKey = event.currentTarget.dataset.defense; 
+    const defenseData = this.actor.system.defenses[defenseKey];
+    
+    const names = {
+        block: "Bloqueio",
+        dodge: "Esquiva",
+        counter: "Contra-Ataque"
+    };
+
+    let roll = new Roll(`1d20 + ${defenseData.total}`);
+    await roll.evaluate({async: true});
+
+    roll.toMessage({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        flavor: `Defesa Ativa: <b style="color: #7a3b3b;">${names[defenseKey]}</b>`
+    });
+  }
+    
     // Garante que só armas possam rolar ataques por aqui
     if (item.type !== "weapon") return;
 
