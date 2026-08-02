@@ -21,13 +21,11 @@
         <!-- ABA 1: COMBATE E PERÍCIAS -->
         <div class="tab" data-group="primary" data-tab="combate">
             
-            <!-- PAINEL DE STATUS VITAIS E RECURSOS -->
-            <section class="tactical-dashboard">
+            <!-- PAINEL DE DEFESAS E RESISTÊNCIAS -->
+            <section class="tactical-dashboard" style="margin-top: 10px; background: rgba(122, 59, 59, 0.05); border-color: #a87979; flex-direction: column;">
                 
-          <!-- PAINEL DE DEFESAS ATIVAS -->
-            <section class="tactical-dashboard" style="margin-top: 10px; background: rgba(122, 59, 59, 0.05); border-color: #a87979;">
-                <div class="dashboard-group">
-                    <!-- Transformamos a caixa inteira num botão clicável -->
+                <!-- Linha 1: Defesas Ativas -->
+                <div class="dashboard-group" style="border: none; margin-bottom: 5px;">
                     <div class="stat-box defense-roll" data-defense="block" style="border-color: #7a3b3b; cursor: pointer;" title="Rolar Bloqueio">
                         <label style="color: #7a3b3b; cursor: pointer;">🛡️ Bloqueio</label>
                         <span class="max-value" style="font-size: 20px;">{{system.defenses.block.total}}</span>
@@ -43,11 +41,29 @@
                     <div class="stat-box defense-roll" data-defense="counter" style="border-color: #7a5c3b; cursor: pointer;" title="Rolar Contra-Ataque">
                         <label style="color: #7a5c3b; cursor: pointer;">⚔️ Contra-Ataque</label>
                         <span class="max-value" style="font-size: 20px;">{{system.defenses.counter.total}}</span>
-                        <span style="font-size: 10px; color: #888;">(Luta/Armas + Escudo)</span>
+                        <span style="font-size: 10px; color: #888;">(Armas + Escudo)</span>
+                    </div>
+                </div>
+
+                <!-- Linha 2: Resistências -->
+                <div class="dashboard-group" style="border-top: 1px dashed #a87979; padding-top: 8px; border-right: none;">
+                    <div class="stat-box" style="border-color: #5a3b7a; background: rgba(90, 59, 122, 0.1);">
+                        <label style="color: #5a3b7a;">🛡️ Res. Física</label>
+                        <span class="max-value" style="font-size: 18px; color: #5a3b7a;">{{system.defenses.physical.total}}</span>
+                    </div>
+                    <div class="stat-box" style="border-color: #3b7a57; background: rgba(59, 122, 87, 0.1);">
+                        <label style="color: #3b7a57;">✨ Res. Mágica</label>
+                        <span class="max-value" style="font-size: 18px; color: #3b7a57;">{{system.defenses.magical.total}}</span>
+                    </div>
+                    <div class="stat-box" style="border-color: #4a4a4a; flex: 1.5;">
+                        <label style="color: #4a4a4a;">Resistências Específicas</label>
+                        <input type="text" name="system.defenses.specific" value="{{system.defenses.specific}}" placeholder="Ex: Fogo, Veneno, Frio..." style="width: 100%; height: 24px; text-align: center; border: 1px solid #c9c7b8; border-radius: 3px; font-size: 12px;"/>
                     </div>
                 </div>
             </section>
-                
+
+            <!-- PAINEL DE STATUS VITAIS E RECURSOS -->
+            <section class="tactical-dashboard">
                 <!-- Bloco 1: Vida e Nível -->
                 <div class="dashboard-group">
                     <div class="stat-box vital">
@@ -187,105 +203,146 @@
                                 <input type="text" name="system.skills.combat.willpower.bonus" value="{{system.skills.combat.willpower.bonus}}" data-dtype="Number"/>
                             </li>
 
-                            <!-- PERÍCIAS DE CLASSE (Tratadas como Combate) -->
-                            <li class="skill-row">
+                            <!-- PERÍCIAS DE CLASSE (Condicionais) -->
+                            {{#if visibleSkills.arcanism}}
+                            <li class="skill-row" style="background: rgba(212, 175, 55, 0.1);">
                                 <a class="skill-roll" data-skill="arcanism" title="Rolar Arcanismo"><i class="fas fa-dice-d20"></i></a>
                                 <span class="skill-name">Arcanismo</span>
                                 <span class="skill-total">{{system.skills.combat.arcanism.total}}</span>
                                 <input type="text" name="system.skills.combat.arcanism.rank" value="{{system.skills.combat.arcanism.rank}}" data-dtype="Number"/>
                                 <input type="text" name="system.skills.combat.arcanism.bonus" value="{{system.skills.combat.arcanism.bonus}}" data-dtype="Number"/>
                             </li>
-                            <li class="skill-row">
+                            {{/if}}
+                            
+                            {{#if visibleSkills.arcaneRitual}}
+                            <li class="skill-row" style="background: rgba(212, 175, 55, 0.1);">
                                 <a class="skill-roll" data-skill="arcaneRitual" title="Rolar Ritual Arcano"><i class="fas fa-dice-d20"></i></a>
                                 <span class="skill-name">Ritual Arcano</span>
                                 <span class="skill-total">{{system.skills.combat.arcaneRitual.total}}</span>
                                 <input type="text" name="system.skills.combat.arcaneRitual.rank" value="{{system.skills.combat.arcaneRitual.rank}}" data-dtype="Number"/>
                                 <input type="text" name="system.skills.combat.arcaneRitual.bonus" value="{{system.skills.combat.arcaneRitual.bonus}}" data-dtype="Number"/>
                             </li>
-                            <li class="skill-row">
+                            {{/if}}
+
+                            {{#if visibleSkills.chakra}}
+                            <li class="skill-row" style="background: rgba(212, 175, 55, 0.1);">
                                 <a class="skill-roll" data-skill="chakra" title="Rolar Chakra"><i class="fas fa-dice-d20"></i></a>
                                 <span class="skill-name">Chakra</span>
                                 <span class="skill-total">{{system.skills.combat.chakra.total}}</span>
                                 <input type="text" name="system.skills.combat.chakra.rank" value="{{system.skills.combat.chakra.rank}}" data-dtype="Number"/>
                                 <input type="text" name="system.skills.combat.chakra.bonus" value="{{system.skills.combat.chakra.bonus}}" data-dtype="Number"/>
                             </li>
-                            <li class="skill-row">
+                            {{/if}}
+
+                            {{#if visibleSkills.divineBlessing}}
+                            <li class="skill-row" style="background: rgba(212, 175, 55, 0.1);">
                                 <a class="skill-roll" data-skill="divineBlessing" title="Rolar Benção Divina"><i class="fas fa-dice-d20"></i></a>
                                 <span class="skill-name">Benção Divina</span>
                                 <span class="skill-total">{{system.skills.combat.divineBlessing.total}}</span>
                                 <input type="text" name="system.skills.combat.divineBlessing.rank" value="{{system.skills.combat.divineBlessing.rank}}" data-dtype="Number"/>
                                 <input type="text" name="system.skills.combat.divineBlessing.bonus" value="{{system.skills.combat.divineBlessing.bonus}}" data-dtype="Number"/>
                             </li>
-                            <li class="skill-row">
+                            {{/if}}
+
+                            {{#if visibleSkills.divineRitual}}
+                            <li class="skill-row" style="background: rgba(212, 175, 55, 0.1);">
                                 <a class="skill-roll" data-skill="divineRitual" title="Rolar Ritual Divino"><i class="fas fa-dice-d20"></i></a>
                                 <span class="skill-name">Ritual Divino</span>
                                 <span class="skill-total">{{system.skills.combat.divineRitual.total}}</span>
                                 <input type="text" name="system.skills.combat.divineRitual.rank" value="{{system.skills.combat.divineRitual.rank}}" data-dtype="Number"/>
                                 <input type="text" name="system.skills.combat.divineRitual.bonus" value="{{system.skills.combat.divineRitual.bonus}}" data-dtype="Number"/>
                             </li>
-                            <li class="skill-row">
+                            {{/if}}
+
+                            {{#if visibleSkills.druidicRitual}}
+                            <li class="skill-row" style="background: rgba(212, 175, 55, 0.1);">
                                 <a class="skill-roll" data-skill="druidicRitual" title="Rolar Ritual Druídico"><i class="fas fa-dice-d20"></i></a>
                                 <span class="skill-name">Ritual Druídico</span>
                                 <span class="skill-total">{{system.skills.combat.druidicRitual.total}}</span>
                                 <input type="text" name="system.skills.combat.druidicRitual.rank" value="{{system.skills.combat.druidicRitual.rank}}" data-dtype="Number"/>
                                 <input type="text" name="system.skills.combat.druidicRitual.bonus" value="{{system.skills.combat.druidicRitual.bonus}}" data-dtype="Number"/>
                             </li>
-                            <li class="skill-row">
+                            {{/if}}
+
+                            {{#if visibleSkills.faith}}
+                            <li class="skill-row" style="background: rgba(212, 175, 55, 0.1);">
                                 <a class="skill-roll" data-skill="faith" title="Rolar Fé"><i class="fas fa-dice-d20"></i></a>
                                 <span class="skill-name">Fé</span>
                                 <span class="skill-total">{{system.skills.combat.faith.total}}</span>
                                 <input type="text" name="system.skills.combat.faith.rank" value="{{system.skills.combat.faith.rank}}" data-dtype="Number"/>
                                 <input type="text" name="system.skills.combat.faith.bonus" value="{{system.skills.combat.faith.bonus}}" data-dtype="Number"/>
                             </li>
-                            <li class="skill-row">
+                            {{/if}}
+
+                            {{#if visibleSkills.herbalism}}
+                            <li class="skill-row" style="background: rgba(212, 175, 55, 0.1);">
                                 <a class="skill-roll" data-skill="herbalism" title="Rolar Herbalismo"><i class="fas fa-dice-d20"></i></a>
                                 <span class="skill-name">Herbalismo</span>
                                 <span class="skill-total">{{system.skills.combat.herbalism.total}}</span>
                                 <input type="text" name="system.skills.combat.herbalism.rank" value="{{system.skills.combat.herbalism.rank}}" data-dtype="Number"/>
                                 <input type="text" name="system.skills.combat.herbalism.bonus" value="{{system.skills.combat.herbalism.bonus}}" data-dtype="Number"/>
                             </li>
-                            <li class="skill-row">
+                            {{/if}}
+
+                            {{#if visibleSkills.magicalMusic}}
+                            <li class="skill-row" style="background: rgba(212, 175, 55, 0.1);">
                                 <a class="skill-roll" data-skill="magicalMusic" title="Rolar Música Mágica"><i class="fas fa-dice-d20"></i></a>
                                 <span class="skill-name">Música Mágica</span>
                                 <span class="skill-total">{{system.skills.combat.magicalMusic.total}}</span>
                                 <input type="text" name="system.skills.combat.magicalMusic.rank" value="{{system.skills.combat.magicalMusic.rank}}" data-dtype="Number"/>
                                 <input type="text" name="system.skills.combat.magicalMusic.bonus" value="{{system.skills.combat.magicalMusic.bonus}}" data-dtype="Number"/>
                             </li>
-                            <li class="skill-row">
+                            {{/if}}
+
+                            {{#if visibleSkills.marksmanship}}
+                            <li class="skill-row" style="background: rgba(212, 175, 55, 0.1);">
                                 <a class="skill-roll" data-skill="marksmanship" title="Rolar Pontaria"><i class="fas fa-dice-d20"></i></a>
                                 <span class="skill-name">Pontaria</span>
                                 <span class="skill-total">{{system.skills.combat.marksmanship.total}}</span>
                                 <input type="text" name="system.skills.combat.marksmanship.rank" value="{{system.skills.combat.marksmanship.rank}}" data-dtype="Number"/>
                                 <input type="text" name="system.skills.combat.marksmanship.bonus" value="{{system.skills.combat.marksmanship.bonus}}" data-dtype="Number"/>
                             </li>
-                            <li class="skill-row">
+                            {{/if}}
+
+                            {{#if visibleSkills.rage}}
+                            <li class="skill-row" style="background: rgba(212, 175, 55, 0.1);">
                                 <a class="skill-roll" data-skill="rage" title="Rolar Fúria"><i class="fas fa-dice-d20"></i></a>
                                 <span class="skill-name">Fúria</span>
                                 <span class="skill-total">{{system.skills.combat.rage.total}}</span>
                                 <input type="text" name="system.skills.combat.rage.rank" value="{{system.skills.combat.rage.rank}}" data-dtype="Number"/>
                                 <input type="text" name="system.skills.combat.rage.bonus" value="{{system.skills.combat.rage.bonus}}" data-dtype="Number"/>
                             </li>
-                            <li class="skill-row">
+                            {{/if}}
+
+                            {{#if visibleSkills.runeMagic}}
+                            <li class="skill-row" style="background: rgba(212, 175, 55, 0.1);">
                                 <a class="skill-roll" data-skill="runeMagic" title="Rolar Magia Rúnica"><i class="fas fa-dice-d20"></i></a>
                                 <span class="skill-name">Magia Rúnica</span>
                                 <span class="skill-total">{{system.skills.combat.runeMagic.total}}</span>
                                 <input type="text" name="system.skills.combat.runeMagic.rank" value="{{system.skills.combat.runeMagic.rank}}" data-dtype="Number"/>
                                 <input type="text" name="system.skills.combat.runeMagic.bonus" value="{{system.skills.combat.runeMagic.bonus}}" data-dtype="Number"/>
                             </li>
-                            <li class="skill-row">
+                            {{/if}}
+
+                            {{#if visibleSkills.thievery}}
+                            <li class="skill-row" style="background: rgba(212, 175, 55, 0.1);">
                                 <a class="skill-roll" data-skill="thievery" title="Rolar Ladinagem"><i class="fas fa-dice-d20"></i></a>
                                 <span class="skill-name">Ladinagem</span>
                                 <span class="skill-total">{{system.skills.combat.thievery.total}}</span>
                                 <input type="text" name="system.skills.combat.thievery.rank" value="{{system.skills.combat.thievery.rank}}" data-dtype="Number"/>
                                 <input type="text" name="system.skills.combat.thievery.bonus" value="{{system.skills.combat.thievery.bonus}}" data-dtype="Number"/>
                             </li>
-                            <li class="skill-row">
+                            {{/if}}
+
+                            {{#if visibleSkills.training}}
+                            <li class="skill-row" style="background: rgba(212, 175, 55, 0.1);">
                                 <a class="skill-roll" data-skill="training" title="Rolar Treinamento"><i class="fas fa-dice-d20"></i></a>
                                 <span class="skill-name">Treinamento</span>
                                 <span class="skill-total">{{system.skills.combat.training.total}}</span>
                                 <input type="text" name="system.skills.combat.training.rank" value="{{system.skills.combat.training.rank}}" data-dtype="Number"/>
                                 <input type="text" name="system.skills.combat.training.bonus" value="{{system.skills.combat.training.bonus}}" data-dtype="Number"/>
                             </li>
+                            {{/if}}
                         </ul>
                     </div>
 
@@ -580,10 +637,56 @@
             </div>
         </div>
 
-     <!-- ABA 3: INVENTÁRIO -->
+        <!-- ABA 3: INVENTÁRIO -->
         <div class="tab" data-group="primary" data-tab="inventario">
             
             <div class="inventory-container">
+
+                <!-- PAINEL DE GESTÃO (Moedas e Carga) Moficicado para o TOPO -->
+                <div class="inventory-management" style="display: flex; gap: 15px; margin-bottom: 15px;">
+                    
+                    <!-- MOEDAS -->
+                    <section class="currency-dashboard" style="flex: 1; background: rgba(212, 175, 55, 0.05); border: 1px solid #c9a75c; border-radius: 5px; padding: 10px;">
+                        <h3 class="section-title" style="border-bottom-color: #c9a75c; color: #8a6d25; margin-top: 0;">💰 Riquezas</h3>
+                        <div class="dashboard-group" style="border: none; padding: 0; justify-content: space-between;">
+                            <div class="stat-box" style="border-color: #c9a75c; flex: 1; margin-right: 5px;">
+                                <label style="color: #8a6d25;">KO</label>
+                                <input name="system.attributes.money.ko" type="text" value="{{system.attributes.money.ko}}" data-dtype="Number" style="width: 100%; text-align: center; border: 1px solid #c9a75c; border-radius: 3px; height: 24px; font-weight: bold;"/>
+                            </div>
+                            <div class="stat-box" style="border-color: #7a94a8; flex: 1;">
+                                <label style="color: #4b6a82;">FP</label>
+                                <input name="system.attributes.money.fp" type="text" value="{{system.attributes.money.fp}}" data-dtype="Number" style="width: 100%; text-align: center; border: 1px solid #7a94a8; border-radius: 3px; height: 24px; font-weight: bold;"/>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- CARGA (Visual Otimizado) -->
+                    <section class="carry-weight-dashboard" style="flex: 2; margin: 0; padding: 10px; background: rgba(0, 0, 0, 0.02); border: 1px solid #c9c7b8; border-radius: 5px;">
+                        <h3 class="section-title" style="margin-top: 0;">⚖️ Capacidade de Carga (kg)</h3>
+                        <div class="weight-grid" style="gap: 5px;">
+                            <div class="weight-box atual" style="background: #4a4a4a; color: white; border-color: #222; padding: 4px;">
+                                <label style="color: #ccc; font-size: 9px;">Atual</label>
+                                <span style="color: white; font-size: 14px;">{{system.attributes.carga.atual}}</span>
+                            </div>
+                            <div class="weight-box leve" style="padding: 4px;">
+                                <label style="font-size: 9px;">Leve</label>
+                                <span style="font-size: 14px;">{{system.attributes.carga.leve}}</span>
+                            </div>
+                            <div class="weight-box media" style="padding: 4px;">
+                                <label style="font-size: 9px;">Média</label>
+                                <span style="font-size: 14px;">{{system.attributes.carga.media}}</span>
+                            </div>
+                            <div class="weight-box pesada" style="padding: 4px;">
+                                <label style="font-size: 9px;">Pesada</label>
+                                <span style="font-size: 14px;">{{system.attributes.carga.pesada}}</span>
+                            </div>
+                            <div class="weight-box erguer" style="padding: 4px;">
+                                <label style="font-size: 9px;">Erguer</label>
+                                <span style="font-size: 14px;">{{system.attributes.carga.erguer}}</span>
+                            </div>
+                        </div>
+                    </section>
+                </div>
                 
                 <!-- ARMAS -->
                 <section class="inventory-group">
@@ -599,13 +702,10 @@
                     <ul class="item-list">
                         {{#each weapons as |item id|}}
                         <li class="item" data-item-id="{{item._id}}">
-                            <!-- Ícone de Equipado -->
                             <a class="item-equip-toggle {{#if item.system.equipped}}is-equipped{{/if}}" title="Equipar">
                                 <i class="{{#if item.system.equipped}}fas{{else}}far{{/if}} fa-check-circle"></i>
                             </a>
-                            
                            <div class="item-name">
-                                <!-- Adicionamos a classe item-roll e um cursor pointer -->
                                 <img src="{{item.img}}" title="Atacar com {{item.name}}" width="24" height="24" class="item-roll" style="cursor: pointer; border-radius: 3px;"/>
                                 <h4>{{item.name}}</h4>
                             </div>
@@ -638,12 +738,10 @@
                             <a class="item-equip-toggle {{#if item.system.equipped}}is-equipped{{/if}}" title="Equipar">
                                 <i class="{{#if item.system.equipped}}fas{{else}}far{{/if}} fa-check-circle"></i>
                             </a>
-                            
                             <div class="item-name">
                                 <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                                 <h4>{{item.name}}</h4>
                             </div>
-                            <!-- Se for escudo, mostra bônus de bloqueio, senão mostra resis. física da armadura -->
                             <span class="item-stat">{{#if item.system.blockBonus}}+{{item.system.blockBonus}}{{else}}{{item.system.physicalResist}}{{/if}}</span>
                             <span class="item-stat">{{item.system.magicalResist}}</span>
                             <span class="item-stat">{{item.system.weight}} kg</span>
@@ -682,53 +780,6 @@
                         {{/each}}
                     </ul>
                 </section>
-
-<!-- PAINEL DE GESTÃO (Moedas e Carga) -->
-            <div class="inventory-management" style="display: flex; gap: 15px; margin-bottom: 15px;">
-                
-                <!-- MOEDAS -->
-                <section class="currency-dashboard" style="flex: 1; background: rgba(212, 175, 55, 0.05); border: 1px solid #c9a75c; border-radius: 5px; padding: 10px;">
-                    <h3 class="section-title" style="border-bottom-color: #c9a75c; color: #8a6d25; margin-top: 0;">💰 Riquezas</h3>
-                    <div class="dashboard-group" style="border: none; padding: 0; justify-content: space-between;">
-                        <div class="stat-box" style="border-color: #c9a75c; flex: 1; margin-right: 5px;">
-                            <label style="color: #8a6d25;">KO</label>
-                            <input name="system.attributes.money.ko" type="text" value="{{system.attributes.money.ko}}" data-dtype="Number" style="width: 100%; text-align: center; border: 1px solid #c9a75c; border-radius: 3px; height: 24px; font-weight: bold;"/>
-                        </div>
-                        <div class="stat-box" style="border-color: #7a94a8; flex: 1;">
-                            <label style="color: #4b6a82;">FP</label>
-                            <input name="system.attributes.money.fp" type="text" value="{{system.attributes.money.fp}}" data-dtype="Number" style="width: 100%; text-align: center; border: 1px solid #7a94a8; border-radius: 3px; height: 24px; font-weight: bold;"/>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- CARGA (Visual Otimizado) -->
-                <section class="carry-weight-dashboard" style="flex: 2; margin: 0; padding: 10px; background: rgba(0, 0, 0, 0.02); border: 1px solid #c9c7b8; border-radius: 5px;">
-                    <h3 class="section-title" style="margin-top: 0;">⚖️ Capacidade de Carga (kg)</h3>
-                    <div class="weight-grid" style="gap: 5px;">
-                        <div class="weight-box atual" style="background: #4a4a4a; color: white; border-color: #222; padding: 4px;">
-                            <label style="color: #ccc; font-size: 9px;">Atual</label>
-                            <span style="color: white; font-size: 14px;">{{system.attributes.carga.atual}}</span>
-                        </div>
-                        <div class="weight-box leve" style="padding: 4px;">
-                            <label style="font-size: 9px;">Leve</label>
-                            <span style="font-size: 14px;">{{system.attributes.carga.leve}}</span>
-                        </div>
-                        <div class="weight-box media" style="padding: 4px;">
-                            <label style="font-size: 9px;">Média</label>
-                            <span style="font-size: 14px;">{{system.attributes.carga.media}}</span>
-                        </div>
-                        <div class="weight-box pesada" style="padding: 4px;">
-                            <label style="font-size: 9px;">Pesada</label>
-                            <span style="font-size: 14px;">{{system.attributes.carga.pesada}}</span>
-                        </div>
-                        <div class="weight-box erguer" style="padding: 4px;">
-                            <label style="font-size: 9px;">Erguer</label>
-                            <span style="font-size: 14px;">{{system.attributes.carga.erguer}}</span>
-                        </div>
-                    </div>
-                </section>
-                
-            </div>
                 
             </div>
         </div>
