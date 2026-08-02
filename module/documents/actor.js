@@ -123,24 +123,22 @@ export class ElementiaActor extends Actor {
         }
     }
     
-      // ========================================================================
-    // 7. PROCESSAMENTO DE INVENTÁRIO (Peso Total e Defesas de Equipamentos)
+// ========================================================================
+    // 7. PROCESSAMENTO DE INVENTÁRIO E DEFESAS
     // ========================================================================
     
     let pesoAtual = 0;
     let bonusBloqueioEquipamento = 0;
     let penalidadeEsquivaEquipamento = 0;
+    let bonusContraAtaqueEquipamento = 0; // Nova variável
 
-    // Faz um loop por todos os itens que o personagem possui
     for (let item of this.items) {
         const itemData = item.system;
         
-        // 1. Soma do Peso (Garante que ferramentas com múltiplas unidades sejam somadas corretamente)
         const peso = itemData.weight || 0;
         const quantidade = itemData.quantity || 1;
         pesoAtual += (peso * quantidade);
 
-        // 2. Extração de Status de Combate (Apenas se o item estiver EQUIPADO)
         if (itemData.equipped) {
             if (item.type === 'armor') {
                 bonusBloqueioEquipamento += (itemData.physicalResist || 0);
@@ -149,20 +147,27 @@ export class ElementiaActor extends Actor {
             else if (item.type === 'shield') {
                 bonusBloqueioEquipamento += (itemData.blockBonus || 0);
                 penalidadeEsquivaEquipamento += (itemData.dodgePenalty || 0);
+                bonusContraAtaqueEquipamento += (itemData.counterBonus || 0); // Soma bônus do escudo
             }
         }
     }
 
-    // Salva o peso total arredondado para evitar números infinitos (ex: 1.33333)
     system.attributes.carga.atual = parseFloat(pesoAtual.toFixed(2));
 
-    // 3. Aplica a Regra de Game Design para as Defesas
-    // Bloqueio = Resiliência Total + Bônus do Equipamento
+    // Bloqueio
     system.defenses.block.bonus = bonusBloqueioEquipamento;
     system.defenses.block.total = system.skills.combat.resilience.total + bonusBloqueioEquipamento;
 
-    // Esquiva = Reflexos Total - Penalidade do Equipamento
+    // Esquiva
     system.defenses.dodge.bonus = penalidadeEsquivaEquipamento; 
     system.defenses.dodge.total = system.skills.combat.reflexes.total - Math.abs(penalidadeEsquivaEquipamento);
-    }
+
+    // Contra-Ataque (Usa o maior valor entre Luta e Habilidade com Armas)
+    let brawling = system.skills.combat.brawling.total;
+    let weaponSkill = system.skills.combat.weaponSkill.total;
+    let baseCounter = Math.max(brawling, weaponSkill);
+    
+    system.defenses.counter.bonus = bonusContraAtaqueEquipamento;
+    system.defenses.counter.total = baseCounter + bonusContraAtaqueEquipamento;
   }
+}
