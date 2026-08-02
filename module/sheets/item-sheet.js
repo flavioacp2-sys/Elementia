@@ -11,7 +11,7 @@ export class ElementiaItemSheet extends ItemSheet {
     });
   }
 
-  /** @override */
+/** @override */
   getData() {
     const context = super.getData();
     const itemData = this.item.toObject(false);
@@ -25,7 +25,11 @@ export class ElementiaItemSheet extends ItemSheet {
     context.isShield = this.item.type === "shield";
     context.isGear = this.item.type === "gear";
     context.isAbility = this.item.type === "ability";
+    
+    // AS NOVAS FLAGS DA FUNDAÇÃO DE PERSONAGEM
     context.isClass = this.item.type === "class";
+    context.isRace = this.item.type === "race";
+    context.isOrigin = this.item.type === "origin";
 
     // Prepara o editor de texto rico da descrição
     context.enrichedDescription = async () => {
@@ -34,4 +38,3 @@ export class ElementiaItemSheet extends ItemSheet {
 
     return context;
   }
-}
