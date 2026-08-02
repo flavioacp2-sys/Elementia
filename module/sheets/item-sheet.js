@@ -31,6 +31,9 @@ export class ElementiaItemSheet extends ItemSheet {
     context.isRace = this.item.type === "race";
     context.isOrigin = this.item.type === "origin";
 
+    // FLAG PARA MAGIAS E RITUAIS
+    context.isSpell = this.item.type === "spell";
+
     // Prepara o editor de texto rico da descrição
     context.enrichedDescription = async () => {
       return await TextEditor.enrichHTML(this.item.system.description, {async: true});
