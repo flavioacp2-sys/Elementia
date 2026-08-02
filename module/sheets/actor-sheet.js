@@ -41,6 +41,9 @@ export class ElementiaCharacterSheet extends ActorSheet {
     // =====================================
     html.find('.skill-roll').click(this._onRollSkill.bind(this));
 
+    // OUVINTE: ROLAGEM DE DEFESAS ATIVAS
+    html.find('.defense-roll').click(this._onRollDefense.bind(this));
+    
     // =====================================
     // OUVINTES: GERENCIAMENTO DE ITENS
     // =====================================
