@@ -214,11 +214,28 @@
         "skillBonus": ""
       }
     },
-    "ability": {
+    "skill": {
       "description": "",
       "actionCost": "1 Ação",
       "resourceCost": "",
       "sourceType": "racial"
     }
+    "ability": {
+        "description": "",
+        "actionCost": "",
+        "resourceCost": "",
+        "sourceType": "class"
+      },
+      "spell": {
+        "description": "",
+        "spellType": "magia",
+        "tier": 1,
+        "actionCost": "1 Ação",
+        "resourceCost": "1 Mana",
+        "range": "10m",
+        "target": "1 criatura",
+        "duration": "Instantâneo",
+        "defense": ""
+      },
   }
 }
