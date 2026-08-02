@@ -130,7 +130,7 @@ export class ElementiaActor extends Actor {
     let pesoAtual = 0;
     let bonusBloqueioEquipamento = 0;
     let penalidadeEsquivaEquipamento = 0;
-    let bonusContraAtaqueEquipamento = 0; // Nova variável
+    let bonusContraAtaqueEquipamento = 0;
 
     for (let item of this.items) {
         const itemData = item.system;
@@ -147,7 +147,7 @@ export class ElementiaActor extends Actor {
             else if (item.type === 'shield') {
                 bonusBloqueioEquipamento += (itemData.blockBonus || 0);
                 penalidadeEsquivaEquipamento += (itemData.dodgePenalty || 0);
-                bonusContraAtaqueEquipamento += (itemData.counterBonus || 0); // Soma bônus do escudo
+                bonusContraAtaqueEquipamento += (itemData.counterBonus || 0);
             }
         }
     }
@@ -162,12 +162,9 @@ export class ElementiaActor extends Actor {
     system.defenses.dodge.bonus = penalidadeEsquivaEquipamento; 
     system.defenses.dodge.total = system.skills.combat.reflexes.total - Math.abs(penalidadeEsquivaEquipamento);
 
-    // Contra-Ataque (Usa o maior valor entre Luta e Habilidade com Armas)
-    let brawling = system.skills.combat.brawling.total;
+    // Contra-Ataque (Habilidade com Armas + Bônus de Equipamento/Escudo)
     let weaponSkill = system.skills.combat.weaponSkill.total;
-    let baseCounter = Math.max(brawling, weaponSkill);
-    
     system.defenses.counter.bonus = bonusContraAtaqueEquipamento;
-    system.defenses.counter.total = baseCounter + bonusContraAtaqueEquipamento;
+    system.defenses.counter.total = weaponSkill + bonusContraAtaqueEquipamento;
   }
 }
